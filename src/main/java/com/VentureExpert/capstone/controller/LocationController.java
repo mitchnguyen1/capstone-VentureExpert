@@ -1,2 +1,4 @@
-package com.VentureExpert.capstone.controller;public class LocationController {
+package com.VentureExpert.capstone.controller;
+
+public class LocationController {
 }

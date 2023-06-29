@@ -1,5 +1,6 @@
 package com.VentureExpert.capstone.entities;
 
+import com.VentureExpert.capstone.dtos.TodoDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -38,9 +39,20 @@ public class Todo {
     @Column
     private Time start;
 
-    @Column
+    @Column(name = "\"end\"")
     private Time end;
 
     @Column
-    private double cost;
+    private Double cost;
+
+    public Todo(TodoDTO todo) {
+        this.todoId = todo.getTodoId();
+        this.itinerary = todo.getItinerary();
+        this.location = todo.getLocation();
+        this.title = todo.getTitle();
+        this.date = todo.getDate();
+        this.start = todo.getStart();
+        this.end = todo.getEnd();
+        this.cost = todo.getCost();
+    }
 }

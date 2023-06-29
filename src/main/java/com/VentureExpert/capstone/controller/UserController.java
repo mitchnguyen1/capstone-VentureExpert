@@ -1,2 +1,4 @@
-package com.VentureExpert.capstone.controller;public class UserController {
+package com.VentureExpert.capstone.controller;
+
+public class UserController {
 }

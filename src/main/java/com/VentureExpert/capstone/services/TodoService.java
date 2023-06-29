@@ -1,2 +1,4 @@
-package com.VentureExpert.capstone.services;public interface TodoService {
+package com.VentureExpert.capstone.services;
+
+public interface TodoService {
 }

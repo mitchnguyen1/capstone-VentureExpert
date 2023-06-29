@@ -1,5 +1,6 @@
 package com.VentureExpert.capstone.entities;
 
+import com.VentureExpert.capstone.dtos.LocationDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,11 +20,11 @@ public class Location {
     @Column(name = "location_id")
     private Integer locationId;
 
-    @Column
-    private Float lat;
+    @Column(nullable = true)
+    private Double lat;
 
-    @Column
-    private Float lng;
+    @Column(nullable = true)
+    private Double lng;
 
     @Column
     private String city;
@@ -31,9 +32,25 @@ public class Location {
     @Column
     private String state;
 
+    @Column(nullable = true)
+    private String address;
+
+    @Column(nullable = true)
+    private Integer zipcode;
+
     @OneToMany(mappedBy = "location", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Todo> todos;
 
-    @ManyToMany(mappedBy = "locations", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Itinerary> itineraries;
+    @OneToOne(mappedBy = "location", fetch = FetchType.LAZY)
+    private Itinerary itinerary;
+
+    public Location(LocationDTO location) {
+        this.locationId = location.getLocationId();
+        this.lat = location.getLat();
+        this.lng = location.getLng();
+        this.city = location.getCity();
+        this.state = location.getState();
+        this.address = location.getAddress();
+        this.zipcode = location.getZipcode();
+    }
 }
