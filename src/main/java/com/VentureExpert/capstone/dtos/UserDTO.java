@@ -15,16 +15,15 @@ import java.util.List;
 public class UserDTO implements Serializable {
 
 
-    private Integer userId;
+    private Integer id;
     private String username;
     private String password;
     private String fullName;
-    private String email;
     private List<Itinerary> itineraries;
 
     public UserDTO(User user) {
-        if (user.getUserId() != null) {
-            this.userId = user.getUserId();
+        if (user.getId() != null) {
+            this.id = user.getId();
         }
         if (user.getUsername() != null) {
             this.username = user.getUsername();
@@ -32,9 +31,7 @@ public class UserDTO implements Serializable {
         if (user.getPassword() != null) {
             this.password = user.getPassword();
         }
-        if (user.getEmail() != null) {
-            this.password = user.getEmail();
-        }
+
 
     }
 }

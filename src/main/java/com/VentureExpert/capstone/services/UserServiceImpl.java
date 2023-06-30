@@ -51,12 +51,13 @@ public class UserServiceImpl implements UserService {
          */
         List<String> response = new ArrayList<>();
         Optional<User> userOptional = userRepository.findByUsername(userDto.getUsername());
+
         if (userOptional.isPresent()) {
             User user = userOptional.get();
             //check the passwords with encoder
             if (passwordEncoder.matches(userDto.getPassword(), user.getPassword())) {
                 response.add("http://localhost:8080/home.html");
-                response.add(String.valueOf(user.getUserId()));
+                response.add(String.valueOf(user.getId()));
             } else {
                 response.add("Incorrect username or password");
             }

@@ -20,15 +20,8 @@ public class Todo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "todo_id")
-    private Integer todoId;
+    private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "itinerary_id")
-    private Itinerary itinerary;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "location_id")
-    private Location location;
 
     @Column
     private String title;
@@ -45,8 +38,20 @@ public class Todo {
     @Column
     private Double cost;
 
+    @Column
+    private boolean complete;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "itinerary_id")
+    private Itinerary itinerary;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "location_id")
+    private Location location;
+
+
     public Todo(TodoDTO todo) {
-        this.todoId = todo.getTodoId();
+        this.id = todo.getId();
         this.itinerary = todo.getItinerary();
         this.location = todo.getLocation();
         this.title = todo.getTitle();
@@ -54,5 +59,6 @@ public class Todo {
         this.start = todo.getStart();
         this.end = todo.getEnd();
         this.cost = todo.getCost();
+        this.complete = todo.isComplete();
     }
 }

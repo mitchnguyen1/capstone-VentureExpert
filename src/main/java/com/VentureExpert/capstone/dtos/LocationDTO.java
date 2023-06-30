@@ -9,21 +9,23 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class LocationDTO {
-    private Integer locationId;
+    private Integer id;
     private Double lat;
     private Double lng;
     private String city;
     private String state;
     private String address;
     private Integer zipcode;
+    private boolean forTodo;
 
     public LocationDTO(Location location) {
-        this.locationId = location.getLocationId();
+        this.id = location.getId();
         this.lat = location.getLat();
         this.lng = location.getLng();
         this.city = location.getCity();
         this.state = location.getState();
         this.address = location.getAddress();
         this.zipcode = location.getZipcode();
+        this.forTodo = location.isForTodo();
     }
 }

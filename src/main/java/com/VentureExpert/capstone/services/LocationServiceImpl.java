@@ -23,7 +23,7 @@ public class LocationServiceImpl implements LocationService {
     public Integer addLocation(LocationDTO location) {
         Location newLocation = new Location(location);
         Location savedLocation = locationRepository.saveAndFlush(newLocation);
-        return savedLocation.getLocationId();
+        return savedLocation.getId();
     }
 
 

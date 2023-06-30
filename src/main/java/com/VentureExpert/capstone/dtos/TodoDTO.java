@@ -19,7 +19,7 @@ import java.sql.Time;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TodoDTO {
-    private Integer todoId;
+    private Integer id;
     private Itinerary itinerary;
     private Location location;
     private String title;
@@ -27,9 +27,10 @@ public class TodoDTO {
     private Time start;
     private Time end;
     private Double cost;
+    private boolean complete;
 
     public TodoDTO(Todo todo) {
-        this.todoId = todo.getTodoId();
+        this.id = todo.getId();
         this.itinerary = todo.getItinerary();
         this.location = todo.getLocation();
         this.title = todo.getTitle();
@@ -37,5 +38,6 @@ public class TodoDTO {
         this.start = todo.getStart();
         this.end = todo.getEnd();
         this.cost = todo.getCost();
+        this.complete = todo.isComplete();
     }
 }

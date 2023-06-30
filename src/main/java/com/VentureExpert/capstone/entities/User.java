@@ -19,7 +19,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
-    private Integer userId;
+    private Integer id;
 
     @Column
     private String username;
@@ -30,11 +30,9 @@ public class User {
     @Column(name = "full_name")
     private String fullName;
 
-    @Column
-    private String email;
-
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Itinerary> itineraries = new ArrayList<>();
+
     public User(UserDTO user){
         if(user.getUsername() != null ){
             this.username = user.getUsername();
