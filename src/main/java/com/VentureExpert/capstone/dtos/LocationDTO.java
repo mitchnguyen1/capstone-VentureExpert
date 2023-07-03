@@ -16,7 +16,7 @@ public class LocationDTO {
     private String state;
     private String address;
     private Integer zipcode;
-    private boolean forTodo;
+
 
     public LocationDTO(Location location) {
         this.id = location.getId();
@@ -26,6 +26,6 @@ public class LocationDTO {
         this.state = location.getState();
         this.address = location.getAddress();
         this.zipcode = location.getZipcode();
-        this.forTodo = location.isForTodo();
+
     }
 }

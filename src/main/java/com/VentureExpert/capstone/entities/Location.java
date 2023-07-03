@@ -38,8 +38,6 @@ public class Location {
     @Column(nullable = true)
     private Integer zipcode;
 
-    @Column
-    private boolean forTodo;
 
     @OneToMany(mappedBy = "location", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Todo> todos;
@@ -57,6 +55,5 @@ public class Location {
         this.state = location.getState();
         this.address = location.getAddress();
         this.zipcode = location.getZipcode();
-        this.forTodo = location.isForTodo();
     }
 }

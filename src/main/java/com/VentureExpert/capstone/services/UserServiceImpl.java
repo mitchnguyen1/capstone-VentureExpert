@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService {
         // check if the username is available
         String username = userDto.getUsername();
         if (userRepository.findByUsername(username).isPresent()) {
-            response.add("Error");
+            response.add("Username is taken.");
             return response;
         } else {
             User user = new User(userDto);
