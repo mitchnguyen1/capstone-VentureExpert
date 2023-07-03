@@ -30,7 +30,7 @@ public class User {
     @Column(name = "full_name")
     private String fullName;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = {CascadeType.MERGE,CascadeType.PERSIST})
     private List<Itinerary> itineraries = new ArrayList<>();
 
     public User(UserDTO user){
@@ -39,6 +39,9 @@ public class User {
         }
         if(user.getPassword() != null){
             this.password = user.getPassword();
+        }
+        if(user.getFullName() != null){
+            this.fullName = user.getFullName();
         }
     }
 

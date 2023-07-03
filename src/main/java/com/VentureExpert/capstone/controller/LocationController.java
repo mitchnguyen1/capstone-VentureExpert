@@ -15,10 +15,7 @@ import java.util.List;
 public class LocationController {
 
     @Autowired
-    LocationService locationService;
-
-    @Autowired
-    UserRepository userRepository;
+    private LocationService locationService;
 
 
     @PostMapping("/add")
@@ -31,4 +28,13 @@ public class LocationController {
         return locationService.getLocationByID(id);
     }
 
+    @PutMapping("/update")
+    void updateLocation(@RequestBody LocationDTO locationDTO){
+        locationService.updateLocation(locationDTO);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    void deleteLocation(@PathVariable Integer id){
+        locationService.deleteLocation(id);
+    }
 }

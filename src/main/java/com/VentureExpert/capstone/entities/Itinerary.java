@@ -1,19 +1,20 @@
 package com.VentureExpert.capstone.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Date;
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
 @Table(name = "itinerary")
 public class Itinerary {
 
@@ -29,10 +30,9 @@ public class Itinerary {
     private Date start;
 
     @Column(name = "\"end\"")
-    private Time end;
+    private Date end;
 
-
-
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
@@ -44,4 +44,14 @@ public class Itinerary {
     @OneToMany(mappedBy = "itinerary", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Todo> todos = new ArrayList<>();
 
+    public Itinerary(Itinerary itinerary) {
+        this.id = itinerary.getId();
+        this.title = itinerary.getTitle();
+        this.start = itinerary.getStart();
+        this.end = itinerary.getEnd();
+        this.user = itinerary.getUser();
+        this.location = itinerary.getLocation();
+    }
+
 }
+

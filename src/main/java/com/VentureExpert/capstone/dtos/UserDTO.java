@@ -31,7 +31,9 @@ public class UserDTO implements Serializable {
         if (user.getPassword() != null) {
             this.password = user.getPassword();
         }
-
+        if (user.getFullName() != null) {
+            this.fullName = user.getFullName();
+        }
 
     }
 }

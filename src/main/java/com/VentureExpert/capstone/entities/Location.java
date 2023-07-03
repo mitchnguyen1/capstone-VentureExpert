@@ -47,6 +47,7 @@ public class Location {
     private List<Itinerary> itineraries;
 
 
+
     public Location(LocationDTO location) {
         this.id = location.getId();
         this.lat = location.getLat();

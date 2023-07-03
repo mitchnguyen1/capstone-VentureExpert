@@ -17,19 +17,10 @@ public class LocationServiceImpl implements LocationService {
     @Autowired
     private LocationRepository locationRepository;
 
-    /**
-     *     private Integer id;
-     *     private Double lat;
-     *     private Double lng;
-     *     private String city;
-     *     private String state;
-     *     private String address;
-     *     private Integer zipcode;
-     *     private boolean forTodo;
-     */
+
     @Override
-    public void addLocation(LocationDTO location) {
-        Location newLocation = new Location(location);
+    public void addLocation(LocationDTO locationDTO) {
+        Location newLocation = new Location(locationDTO);
         locationRepository.saveAndFlush(newLocation);
         System.out.println(newLocation.getId());
     }
@@ -43,6 +34,41 @@ public class LocationServiceImpl implements LocationService {
             return Collections.singletonList(locationDTO);
         }
         return Collections.emptyList();
+    }
+
+    @Override
+    public void updateLocation(LocationDTO locationDTO) {
+        Optional<Location> locationOptional = locationRepository.findById(locationDTO.getId());
+        locationOptional.ifPresent(location -> {
+            if (locationDTO.getLat() != null) {
+                location.setLat(locationDTO.getLat());
+            }
+            if (locationDTO.getLng() != null) {
+                location.setLng(locationDTO.getLng());
+            }
+            if (locationDTO.getCity() != null) {
+                location.setCity(locationDTO.getCity());
+            }
+            if (locationDTO.getState() != null) {
+                location.setState(locationDTO.getState());
+            }
+            if (locationDTO.getAddress() != null) {
+                location.setAddress(locationDTO.getAddress());
+            }
+            if (locationDTO.getZipcode() != null) {
+                location.setZipcode(locationDTO.getZipcode());
+            }
+            locationRepository.saveAndFlush(location);
+        });
+    }
+
+
+    @Override
+    public void deleteLocation(Integer id) {
+        Optional<Location> optionalLocation = locationRepository.findById(id);
+        if(optionalLocation.isPresent()){
+            locationRepository.deleteById(id);
+        }
     }
 
 }
