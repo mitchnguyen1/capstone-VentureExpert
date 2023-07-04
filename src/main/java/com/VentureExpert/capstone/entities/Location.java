@@ -57,4 +57,5 @@ public class Location {
         this.address = location.getAddress();
         this.zipcode = location.getZipcode();
     }
+
 }

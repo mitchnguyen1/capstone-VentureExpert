@@ -2,6 +2,7 @@ package com.VentureExpert.capstone.services;
 
 import com.VentureExpert.capstone.entities.Itinerary;
 import com.VentureExpert.capstone.entities.Location;
+import com.VentureExpert.capstone.entities.Todo;
 import com.VentureExpert.capstone.entities.User;
 import com.VentureExpert.capstone.repositories.ItineraryRepository;
 import com.VentureExpert.capstone.repositories.LocationRepository;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
+import java.sql.Time;
 import java.util.*;
 
 @Service
@@ -40,12 +42,12 @@ public class ItineraryServiceImpl implements ItineraryService {
         Itinerary newItinerary = new Itinerary();
         Location newLocation = new Location();
 
-        // Set location properties
+        // add location to db
         newLocation.setCity(json.get("city"));
         newLocation.setState(json.get("state"));
         locationRepository.saveAndFlush(newLocation);
 
-        // Set itinerary properties
+        // add itinerary to db
         Optional<User> existingUser = userRepository.findById(Integer.valueOf(json.get("userId")));
         newItinerary.setUser(existingUser.orElseThrow(() -> new IllegalArgumentException("User with id: " + json.get("userId") + " ,could not be found.") ));
         newItinerary.setLocation(newLocation);
@@ -59,6 +61,26 @@ public class ItineraryServiceImpl implements ItineraryService {
     @Override
     public List<Map<String, Object>> findItineraryByUser(Integer userID) {
         return itineraryRepository.findAllByUser(userID);
+    }
+
+    @Override
+    public void updateItinerary(Map<String, String> json) {
+        Location newLocation = new Location();
+        // update location
+        newLocation.setCity(json.get("city"));
+        newLocation.setState(json.get("state"));
+        locationRepository.saveAndFlush(newLocation);
+
+
+        //update todo
+        Optional<Itinerary> newItinerary = itineraryRepository.findById(Integer.valueOf(json.get("itineraryId")));
+        newItinerary.ifPresent(itin -> {
+            itin.setLocation(newLocation);
+            itin.setTitle(json.get("title"));
+            itin.setStart(Date.valueOf(json.get("start")));
+            itin.setEnd(Date.valueOf(json.get("end")));
+            itineraryRepository.saveAndFlush(itin);
+        });
     }
 
     @Override

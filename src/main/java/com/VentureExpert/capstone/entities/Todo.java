@@ -1,12 +1,12 @@
 package com.VentureExpert.capstone.entities;
 
 import com.VentureExpert.capstone.dtos.TodoDTO;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.Time;
 
@@ -20,7 +20,7 @@ public class Todo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "todo_id")
-    private Integer id;
+    private Integer todoId;
 
 
     @Column
@@ -41,9 +41,11 @@ public class Todo {
     @Column
     private boolean complete;
 
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "itinerary_id")
     private Itinerary itinerary;
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "location_id")
@@ -51,7 +53,7 @@ public class Todo {
 
 
     public Todo(TodoDTO todo) {
-        this.id = todo.getId();
+        this.todoId = todo.getTodoId();
         this.itinerary = todo.getItinerary();
         this.location = todo.getLocation();
         this.title = todo.getTitle();
@@ -61,4 +63,5 @@ public class Todo {
         this.cost = todo.getCost();
         this.complete = todo.isComplete();
     }
+
 }

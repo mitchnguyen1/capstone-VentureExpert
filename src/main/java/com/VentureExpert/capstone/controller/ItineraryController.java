@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/vi/itinerary")
+@RequestMapping("/api/v1/itinerary")
 public class ItineraryController {
 
     @Autowired

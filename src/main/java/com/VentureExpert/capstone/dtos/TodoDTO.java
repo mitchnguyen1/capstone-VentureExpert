@@ -19,7 +19,7 @@ import java.sql.Time;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TodoDTO {
-    private Integer id;
+    private Integer todoId;
     private Itinerary itinerary;
     private Location location;
     private String title;
@@ -30,7 +30,7 @@ public class TodoDTO {
     private boolean complete;
 
     public TodoDTO(Todo todo) {
-        this.id = todo.getId();
+        this.todoId = todo.getTodoId();
         this.itinerary = todo.getItinerary();
         this.location = todo.getLocation();
         this.title = todo.getTitle();
