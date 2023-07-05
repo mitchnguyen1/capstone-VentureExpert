@@ -1,0 +1,46 @@
+body {
+  background-image: url("../img/naples.jpeg");
+}
+
+form {
+  margin-top: 4vh;
+  display: flex;
+  flex-direction: column;
+  gap: 1vh;
+}
+
+.input-box {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+label {
+  margin: 0;
+  color: white;
+  -webkit-text-stroke: 1.25px black;
+  font-size: 50px;
+  font-family: "vendetta", serif;
+  font-weight: 700;
+  font-style: normal;
+  margin:0vh 1vw;
+  padding: 0vh 0.5vw;
+  background-color: #81f1f7;
+  border: 2px solid #000000;
+  border-radius: 50px;
+}
+
+input {
+  font-size: 40px;
+  font-family: "vendetta", serif;
+  font-weight: 700;
+  font-style: normal;
+  color: #04b2a6;
+  -webkit-text-stroke: 0.5px black;
+}
+.box {
+  display: flex;
+  justify-content: center; /* Horizontally aligns the box to the center */
+  align-items: center; /* Vertically aligns the box to the center */
+}
+

@@ -11,7 +11,7 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   background-color: black;
-  position: relative; /* Add this line to enable positioning of pseudo-element */
+  position: relative; 
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -21,13 +21,13 @@ body {
 body::after {
   content: "";
   position: absolute;
-  top: 5px; /* Adjust the top, right, bottom, and left values to control the border size */
+  top: 5px; 
   right: 5px;
   bottom: 5px;
   left: 5px;
   border: 10px solid white;
   border-radius: 10px;
-  pointer-events: none; /* Ensure the pseudo-element doesn't interfere with interactions */
+  pointer-events: none; 
 }
 
 h1 {
@@ -64,7 +64,7 @@ h1 {
 .menu {
   background-color: #fffae4;
   width: 50%;
-  height: 50%;
+  height: auto;
   border: 2px solid #fed350;
   border-bottom-left-radius: 100px;
   border-bottom-right-radius: 100px;
@@ -109,17 +109,12 @@ button {
   font-style: normal;
   border: 2px solid #fed350;
   border-radius:20px;
-  margin: 1vh 0vw;
+  margin: 2vh 0vw;
+  margin-bottom: 4vh;
   padding-bottom: 1vh;
+  background-color: #11c4b7;
 }
 button:hover{
-    color: #f08080;
-}
-#login{
-    background-color: #9dffb0;
-
-}
-
-#register{
-    background-color: #9dffb0;
+  background-image: linear-gradient(45deg, #11c4b7 25%, #0a736c 25%, #0a736c 50%, #11c4b7 50%, #11c4b7 75%, #0a736c 75%, #0a736c 100%);
+  background-size: 56.57px 56.57px;
 }
