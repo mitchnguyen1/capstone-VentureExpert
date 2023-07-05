@@ -1,0 +1,41 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+body {
+  background-image: url("../img/london.jpeg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+h1{
+    background-color: rgb(169, 102, 43);
+    width: fit-content;
+}
+h6 {
+  margin: 0;
+  margin-bottom: 1vh;
+  background-color: rgb(254, 178, 110);
+  width: fit-content;
+  font-size: 30px;
+  font-family: "avory-i-pe-variable", sans-serif;
+  font-variation-settings: "wght" 500;
+}
+.box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+button {
+  width: min-content;
+}
