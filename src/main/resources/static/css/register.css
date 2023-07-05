@@ -40,7 +40,27 @@ input {
 }
 .box {
   display: flex;
-  justify-content: center; /* Horizontally aligns the box to the center */
-  align-items: center; /* Vertically aligns the box to the center */
+  justify-content: center;
+  align-items: center; 
+}
+#error {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  font-size: 25px;
+  font-family: "vendetta", serif;
+  font-weight: 700;
+  font-style: normal;
+  color: white;
+  -webkit-text-stroke: 0.5px black;
+  background-color: #f08080;
+  border: 2px solid #000000;
+  border-radius: 50px;
+  padding: 0 1vw;
+  width: max-content;
+  margin: 1vh auto;
 }
 
+h2{
+  margin: 1vh 0;
+}

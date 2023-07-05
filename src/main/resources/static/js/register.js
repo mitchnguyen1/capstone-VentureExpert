@@ -2,6 +2,7 @@ const fullName = document.getElementById("fullName")
 const username = document.getElementById("username")
 const password = document.getElementById("password")
 const form = document.getElementById("form")
+const error = document.getElementById("error")
 
 const headers = {
     'Content-Type':'application/json'
@@ -16,7 +17,7 @@ const handleSubmit = async(e) =>{
         username: username.value,
         password: password.value
     }
-    console.log(body)
+
     const response = await fetch(`${baseUrl}/register`,{
         method:"POST",
         body: JSON.stringify(body),
@@ -26,8 +27,22 @@ const handleSubmit = async(e) =>{
 
     const responseArr = await response.json()
     if(response.status === 200){
-        window.location.replace(responseArr[0])
-    }
-}
+        let responseString = responseArr[0];
+        let firstFour = responseString.substring(0,4)
 
+        if(firstFour == "http"){
+          window.location.replace(responseArr[0])
+        }
+        else{
+          displayError(responseString)
+        }
+}
+}
+function displayError(response){
+    error.innerHTML = "";
+    let message = document.createElement("h2");
+    message.innerHTML = response;
+    error.appendChild(message);
+    error.style.display="flex";
+}
 form.addEventListener("submit",handleSubmit)
