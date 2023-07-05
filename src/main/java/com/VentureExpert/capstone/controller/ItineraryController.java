@@ -34,4 +34,9 @@ public class ItineraryController {
     public void deleteItineraryById(@PathVariable Integer id){
         itineraryService.deleteItineraryById(id);
     }
+
+    @PutMapping("/update")
+    public void updateItinerary(@RequestBody Map<String, String> json){
+        itineraryService.updateItinerary(json);
+    }
 }

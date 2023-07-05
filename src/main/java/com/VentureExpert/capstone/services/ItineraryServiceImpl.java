@@ -49,7 +49,7 @@ public class ItineraryServiceImpl implements ItineraryService {
 
         // add itinerary to db
         Optional<User> existingUser = userRepository.findById(Integer.valueOf(json.get("userId")));
-        newItinerary.setUser(existingUser.orElseThrow(() -> new IllegalArgumentException("User with id: " + json.get("userId") + " ,could not be found.") ));
+        newItinerary.setUser(existingUser.orElseThrow(() -> new IllegalArgumentException("User with id: " + json.get("userId") + " ,could not be found.")));
         newItinerary.setLocation(newLocation);
         newItinerary.setTitle(json.get("title"));
         newItinerary.setStart(Date.valueOf(json.get("start")));
@@ -65,26 +65,44 @@ public class ItineraryServiceImpl implements ItineraryService {
 
     @Override
     public void updateItinerary(Map<String, String> json) {
+        int itineraryId = Integer.valueOf(json.get("itineraryId"));
+        String city = json.get("city");
+        String state = json.get("state");
+        String title = json.get("title");
+        String startStr = json.get("start");
+        String endStr = json.get("end");
+
         Location newLocation = new Location();
         // update location
-        newLocation.setCity(json.get("city"));
-        newLocation.setState(json.get("state"));
+        if (city != null) {
+            newLocation.setCity(json.get("city"));
+        }
+        if (state != null) {
+            newLocation.setState(json.get("state"));
+        }
         locationRepository.saveAndFlush(newLocation);
 
 
         //update todo
-        Optional<Itinerary> newItinerary = itineraryRepository.findById(Integer.valueOf(json.get("itineraryId")));
+        Optional<Itinerary> newItinerary = itineraryRepository.findById(itineraryId);
         newItinerary.ifPresent(itin -> {
             itin.setLocation(newLocation);
-            itin.setTitle(json.get("title"));
+            if (title != null) {
+                itin.setTitle(json.get("title"));
+            }
+            if(startStr != null){
             itin.setStart(Date.valueOf(json.get("start")));
+            }
+            if(endStr != null){
             itin.setEnd(Date.valueOf(json.get("end")));
+            }
             itineraryRepository.saveAndFlush(itin);
         });
+
     }
 
     @Override
-    public void deleteItineraryById(Integer id){
+    public void deleteItineraryById(Integer id) {
         itineraryRepository.deleteById(id);
     }
 }

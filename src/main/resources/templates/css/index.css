@@ -11,31 +11,115 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   background-color: black;
+  position: relative; /* Add this line to enable positioning of pseudo-element */
   display: flex;
   flex-direction: column;
   text-align: center;
   justify-content: center;
   align-items: center;
 }
-h1{
-    background-color: rgb(169, 102, 43);
-    width: fit-content;
+body::after {
+  content: "";
+  position: absolute;
+  top: 5px; /* Adjust the top, right, bottom, and left values to control the border size */
+  right: 5px;
+  bottom: 5px;
+  left: 5px;
+  border: 10px solid white;
+  border-radius: 10px;
+  pointer-events: none; /* Ensure the pseudo-element doesn't interfere with interactions */
 }
-h6 {
+
+h1 {
+  font-size: 10vh;
+  font-family: "citizen", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  padding: 1.5vh 1vh;
   margin: 0;
-  margin-bottom: 1vh;
-  background-color: rgb(254, 178, 110);
-  width: fit-content;
-  font-size: 30px;
-  font-family: "avory-i-pe-variable", sans-serif;
-  font-variation-settings: "wght" 500;
+  text-shadow: 7px 10px 3px #020200;
+  color: #fed350;
+  -webkit-text-stroke: 4px #fdf889;
+  background-image: url("../img/wood.png");
+  background-position: center;
+  background-size: cover;
+  border: 1px solid #4b2615;
 }
-.box {
+.title {
+  display: flex;
+  flex-direction: row;
+    margin-top: -5vh;
+}
+
+.down {
+  position: relative;
+  top: 0.75vh;
+}
+
+.up {
+  position: relative;
+  bottom: 0.75vh;
+}
+
+.menu {
+  background-color: #fffae4;
+  width: 50%;
+  height: 50%;
+  border: 2px solid #fed350;
+  border-bottom-left-radius: 100px;
+  border-bottom-right-radius: 100px;
+  border-top-right-radius: 50px;
+  border-top-left-radius: 50px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: flex-start;
+}
+h6 {
+  margin: 0;
+  color: white;
+  -webkit-text-stroke: 2px black;
+  font-size: 75px;
+  font-family: "vendetta", serif;
+  font-weight: 700;
+  font-style: normal;
+}
+.subtitle{
+    margin-top: 4vh;
+    margin-bottom: 2vh;
+}
+.highlight {
+    color: #81f1f7;
+    text-decoration: underline #f08080;
+  }
+  
+.box {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
 }
 
 button {
   width: min-content;
+  color: white;
+  -webkit-text-stroke: 2px black;
+  font-size: 50px;
+  font-family: "vendetta", serif;
+  font-weight: 700;
+  font-style: normal;
+  border: 2px solid #fed350;
+  border-radius:20px;
+  margin: 1vh 0vw;
+  padding-bottom: 1vh;
+}
+button:hover{
+    color: #f08080;
+}
+#login{
+    background-color: #9dffb0;
+
+}
+
+#register{
+    background-color: #9dffb0;
 }
