@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Venture Expert</title>
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="css/todo.css" />
+    <link rel="stylesheet" href="https://use.typekit.net/acn1fkj.css" />
+
+    
+  </head>
+  <body>
+    <header>
+      <svg
+        id="wave"
+        style="transform: rotate(180deg); transition: 0.3s"
+        viewBox="0 0 1440 200"
+        version="1.1"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <defs>
+          <linearGradient id="sw-gradient-0" x1="0" x2="0" y1="1" y2="0">
+            <stop stop-color="rgba(164, 212, 161, 1)" offset="0%"></stop>
+            <stop stop-color="rgba(103, 184, 147, 1)" offset="100%"></stop>
+          </linearGradient>
+        </defs>
+        <path
+          style="transform: translate(0, 0px); opacity: 1"
+          fill="url(#sw-gradient-0)"
+          d="M0,100L40,96.7C80,93,160,87,240,70C320,53,400,27,480,13.3C560,0,640,0,720,30C800,60,880,120,960,120C1040,120,1120,60,1200,30C1280,0,1360,0,1440,26.7C1520,53,1600,107,1680,123.3C1760,140,1840,120,1920,93.3C2000,67,2080,33,2160,20C2240,7,2320,13,2400,43.3C2480,73,2560,127,2640,126.7C2720,127,2800,73,2880,66.7C2960,60,3040,100,3120,103.3C3200,107,3280,73,3360,63.3C3440,53,3520,67,3600,90C3680,113,3760,147,3840,160C3920,173,4000,167,4080,160C4160,153,4240,147,4320,146.7C4400,147,4480,153,4560,146.7C4640,140,4720,120,4800,120C4880,120,4960,140,5040,140C5120,140,5200,120,5280,106.7C5360,93,5440,87,5520,86.7C5600,87,5680,93,5720,96.7L5760,100L5760,200L5720,200C5680,200,5600,200,5520,200C5440,200,5360,200,5280,200C5200,200,5120,200,5040,200C4960,200,4880,200,4800,200C4720,200,4640,200,4560,200C4480,200,4400,200,4320,200C4240,200,4160,200,4080,200C4000,200,3920,200,3840,200C3760,200,3680,200,3600,200C3520,200,3440,200,3360,200C3280,200,3200,200,3120,200C3040,200,2960,200,2880,200C2800,200,2720,200,2640,200C2560,200,2480,200,2400,200C2320,200,2240,200,2160,200C2080,200,2000,200,1920,200C1840,200,1760,200,1680,200C1600,200,1520,200,1440,200C1360,200,1280,200,1200,200C1120,200,1040,200,960,200C880,200,800,200,720,200C640,200,560,200,480,200C400,200,320,200,240,200C160,200,80,200,40,200L0,200Z"
+        ></path>
+        <defs>
+          <linearGradient id="sw-gradient-1" x1="0" x2="0" y1="1" y2="0">
+            <stop stop-color="rgba(124, 201, 194, 1)" offset="0%"></stop>
+            <stop stop-color="rgba(165, 212, 163, 1)" offset="100%"></stop>
+          </linearGradient>
+        </defs>
+        <path
+          style="transform: translate(0, 50px); opacity: 0.9"
+          fill="url(#sw-gradient-1)"
+          d="M0,80L40,90C80,100,160,120,240,120C320,120,400,100,480,80C560,60,640,40,720,53.3C800,67,880,113,960,116.7C1040,120,1120,80,1200,80C1280,80,1360,120,1440,120C1520,120,1600,80,1680,83.3C1760,87,1840,133,1920,153.3C2000,173,2080,167,2160,166.7C2240,167,2320,173,2400,163.3C2480,153,2560,127,2640,106.7C2720,87,2800,73,2880,76.7C2960,80,3040,100,3120,90C3200,80,3280,40,3360,40C3440,40,3520,80,3600,90C3680,100,3760,80,3840,86.7C3920,93,4000,127,4080,136.7C4160,147,4240,133,4320,126.7C4400,120,4480,120,4560,116.7C4640,113,4720,107,4800,106.7C4880,107,4960,113,5040,106.7C5120,100,5200,80,5280,86.7C5360,93,5440,127,5520,126.7C5600,127,5680,93,5720,76.7L5760,60L5760,200L5720,200C5680,200,5600,200,5520,200C5440,200,5360,200,5280,200C5200,200,5120,200,5040,200C4960,200,4880,200,4800,200C4720,200,4640,200,4560,200C4480,200,4400,200,4320,200C4240,200,4160,200,4080,200C4000,200,3920,200,3840,200C3760,200,3680,200,3600,200C3520,200,3440,200,3360,200C3280,200,3200,200,3120,200C3040,200,2960,200,2880,200C2800,200,2720,200,2640,200C2560,200,2480,200,2400,200C2320,200,2240,200,2160,200C2080,200,2000,200,1920,200C1840,200,1760,200,1680,200C1600,200,1520,200,1440,200C1360,200,1280,200,1200,200C1120,200,1040,200,960,200C880,200,800,200,720,200C640,200,560,200,480,200C400,200,320,200,240,200C160,200,80,200,40,200L0,200Z"
+        ></path>
+      </svg>
+    </header>
+    <main>
+
+      <section class="itineraryInfo">
+
+        <div class="itinCard">
+            <div class="input-box">
+                <label for="title">Title</label>
+                <p id="title">New York Trip</p>
+              </div>
+              <div class="input-box">
+                <label for="date">Date</label>
+                <p id="date">08/23/23 - 08/30/23</p>
+              </div>
+              <div class="input-box">
+                <label for="location">Location</label>
+                <p id="location">New York City, New York</p>
+              </div>
+        </div>
+
+      </section>
+
+      <h1>Todo:</h1>
+      <hr>
+      <section class="todo">
+        <div class="itinCard card" style="width: 18rem;">
+            <h3 class="card-header">
+              Featured
+            </h3>
+            <div class="list">
+              <p class="list-item">Title</p>
+              <p class="list-item">A second item</p>
+              <p class="list-item">A third item</p>
+            </div>
+          </div>
+          
+          <div class="itinCard card" style="width: 18rem;">
+            <h3 class="card-header">
+              Featured
+            </h3>
+            <div class="list">
+                <div class="list-item-container">
+                  <label>Title</label>
+                  <p class="list-item">TitleHere</p>
+                </div>
+                <div class="list-item-container">
+                  <label>Date</label>
+                  <p class="list-item">DateHere</p>
+                </div>
+                <div class="list-item-container">
+                  <label>Start</label>
+                  <p class="list-item">StartHere</p>
+                </div>
+                <div class="list-item-container">
+                  <label>End</label>
+                  <p class="list-item">EndHere</p>
+                </div>
+                <div class="list-item-container">
+                  <label>Address</label>
+                  <p class="list-item">AddressHere</p>
+                </div>
+                <div class="list-item-container">
+                  <label>City</label>
+                  <p class="list-item">CityHere</p>
+                </div>
+                <div class="list-item-container">
+                  <label>State</label>
+                  <p class="list-item">StateHere</p>
+                </div>
+                <div class="list-item-container">
+                  <label>Zipcode</label>
+                  <p class="list-item">ZipcodeHere</p>
+                </div>
+                <div class="list-item-container">
+                  <label>Cost</label>
+                  <p class="list-item">CostHere</p>
+                </div>
+              </div>
+          
+          </div>
+          
+          <div class="itinCard card" style="width: 18rem;">
+            <h3 class="card-header">
+              Featured
+            </h3>
+            <div class="list">
+              <p class="list-item">An item</p>
+              <p class="list-item">A second item</p>
+              <p class="list-item">A third item</p>
+            </div>
+          </div><div class="itinCard card" style="width: 18rem;">
+            <h3 class="card-header">
+              Featured
+            </h3>
+            <div class="list">
+              <p class="list-item">An item</p>
+              <p class="list-item">A second item</p>
+              <p class="list-item">A third item</p>
+            </div>
+          </div>
+      </section>
+
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+
+  </body>
+</html>

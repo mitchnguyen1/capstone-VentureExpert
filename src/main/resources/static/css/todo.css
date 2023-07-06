@@ -1,0 +1,92 @@
+html,
+body {
+  margin: 0;
+  overflow-x: none;
+}
+
+body {
+  background-image: url("../img/acnh\ leaf\ cream\ green.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+main {
+  border: 3px solid red;
+  width: 60%;
+  margin: auto;
+}
+
+.itinCard {
+    display: block;
+    padding: 2vh 0vw;
+    margin-bottom: 1.5vh;
+    border: 3px solid #ffd97d;
+    background-color: #fffae4;
+    border-radius: 40px;
+  }
+  .input-box {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1vh;
+  }
+
+  #title,#date,#location{
+    font-size: 40px;
+    font-family: "vendetta", serif;
+    font-weight: 700;
+    font-style: normal;
+    color: #04b2a6;
+    -webkit-text-stroke: 0.5px black;
+    background-color: white;
+    padding: 1vh 1vw;
+    margin: 0;
+    width: 100%;
+    margin-right: 2rem;
+    border: 1px black solid;
+    border-radius: 50px;
+  }
+ .input-box label {
+    margin: 0;
+    color: white;
+    -webkit-text-stroke: 1.25px black;
+    font-size: 50px;
+    font-family: "vendetta", serif;
+    font-weight: 700;
+    font-style: normal;
+    margin: 0vh 1vw;
+    padding: 0vh 0.5vw;
+    background-color: #81f1f7;
+    border-radius: 50px;
+  }
+  h1{
+    font-size: 5rem;
+    font-family: "vendetta", serif;
+    font-weight: 700;
+    color: white;
+    -webkit-text-stroke: 1.25px black;
+  }
+  hr{
+    height: 1vh;
+    width: 100%;
+    background-color: white;
+    opacity: 1;
+    border: 1px solid black;
+  }
+  .todo {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .card-header {
+    text-align: center;
+  }
+
+  .list {
+    margin: 1vh 1vw;
+  }
+.list-item-container{
+    display: flex;
+    
+}

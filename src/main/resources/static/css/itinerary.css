@@ -4,9 +4,6 @@ body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
-}
-
-body {
   background-image: url("../img/pattern.png");
   background-size: cover;
   background-repeat: no-repeat;
@@ -143,7 +140,21 @@ body {
   .input-box {
     display: flex;
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 1vh;
+  }
+
+  p{
+    font-size: 40px;
+    font-family: "vendetta", serif;
+    font-weight: 700;
+    font-style: normal;
+    color: #04b2a6;
+    -webkit-text-stroke: 0.5px black;
+    background-color: white;
+    padding: 1vh 1vw;
+    margin: 0;
+    border: 1px black solid;
+    border-radius: 50px;
   }
   
   label {
@@ -174,10 +185,7 @@ body {
     margin-right: 2vw;
   }
   
-  input:focus {
-    outline: none;
-  }
-  
+
   .buttons {
     display: flex;
     justify-content: flex-end;
