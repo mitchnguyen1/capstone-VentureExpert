@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Venture Expert</title>
+    <link rel="stylesheet" href="css/itinerary.css" />
+    <link rel="stylesheet" href="https://use.typekit.net/acn1fkj.css" />
+  </head>
+  <body>
+    <header>
+      <svg
+        id="wave"
+        style="
+          transform: rotate(180deg);
+          transition: 0.3s;
+          position: absolute;
+          z-index: 3;
+        "
+        viewBox="0 0 1440 190"
+        version="1.1"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <defs>
+          <linearGradient id="sw-gradient-0" x1="0" x2="0" y1="1" y2="0">
+            <stop stop-color="rgba(239, 228, 255, 1)" offset="0%"></stop>
+            <stop stop-color="rgba(236, 179, 255, 1)" offset="100%"></stop>
+          </linearGradient>
+        </defs>
+        <path
+          style="transform: translate(0, 0px); opacity: 1"
+          fill="url(#sw-gradient-0)"
+          d="M0,95L48,82.3C96,70,192,44,288,44.3C384,44,480,70,576,91.8C672,114,768,133,864,120.3C960,108,1056,63,1152,53.8C1248,44,1344,70,1440,69.7C1536,70,1632,44,1728,53.8C1824,63,1920,108,2016,123.5C2112,139,2208,127,2304,114C2400,101,2496,89,2592,98.2C2688,108,2784,139,2880,148.8C2976,158,3072,146,3168,120.3C3264,95,3360,57,3456,53.8C3552,51,3648,82,3744,88.7C3840,95,3936,76,4032,69.7C4128,63,4224,70,4320,60.2C4416,51,4512,25,4608,22.2C4704,19,4800,38,4896,47.5C4992,57,5088,57,5184,66.5C5280,76,5376,95,5472,85.5C5568,76,5664,38,5760,22.2C5856,6,5952,13,6048,31.7C6144,51,6240,82,6336,101.3C6432,120,6528,127,6624,117.2C6720,108,6816,82,6864,69.7L6912,57L6912,190L6864,190C6816,190,6720,190,6624,190C6528,190,6432,190,6336,190C6240,190,6144,190,6048,190C5952,190,5856,190,5760,190C5664,190,5568,190,5472,190C5376,190,5280,190,5184,190C5088,190,4992,190,4896,190C4800,190,4704,190,4608,190C4512,190,4416,190,4320,190C4224,190,4128,190,4032,190C3936,190,3840,190,3744,190C3648,190,3552,190,3456,190C3360,190,3264,190,3168,190C3072,190,2976,190,2880,190C2784,190,2688,190,2592,190C2496,190,2400,190,2304,190C2208,190,2112,190,2016,190C1920,190,1824,190,1728,190C1632,190,1536,190,1440,190C1344,190,1248,190,1152,190C1056,190,960,190,864,190C768,190,672,190,576,190C480,190,384,190,288,190C192,190,96,190,48,190L0,190Z"
+        ></path>
+      </svg>
+
+      <nav>
+        <div class="navbar">
+          <a href="itinerary.html" class="navbar-brand">Home</a>
+          <div class="navbar-right">
+            <p>Welcome, <span id="fullName">John Smith!</span></p>
+
+            <a href="#" class="logout-button">Logout?</a>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <div id="myModal" class="modal card">
+  <p id="modalTitle">Add Itinerary</p>
+  <div class="modal-content">
+    <form action="" id="form">
+      <div class="input-box">
+        <label for="modalTitleInput">Title:</label>
+        <input type="text" id="modalTitleInput" />
+      </div>
+      <div class="input-box">
+        <div class="date-inputs">
+          <div class="date-input">
+            <label for="modalStartInput">Start:</label>
+            <input type="date" id="modalStartInput" min="2023-01-01" max="2100-12-31" />
+          </div>
+          <div class="date-input">
+            <label for="modalEndInput">End:</label>
+            <input type="date" id="modalEndInput" min="2023-01-01" max="2100-12-31" />
+          </div>
+        </div>
+      </div>
+      <div class="input-box">
+        <div class="location-inputs">
+          <div class="location-input">
+            <label for="modalCityInput">City:</label>
+            <input type="text" id="modalCityInput" />
+          </div>
+          <div class="location-input">
+            <label for="modalStateInput">State:</label>
+            <input type="text" id="modalStateInput" />
+          </div>
+        </div>
+      </div>
+      <!-- Rest of your code -->
+
+      <div id="error"></div>
+      <div class="box">
+        <button type="button" id="close">Close</button>
+        <button type="submit" id="submit">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+    <section class="itinerary">
+      <div class="title">
+        <h1 class="up">I</h1>
+        <h1 class="down">t</h1>
+        <h1 class="up">i</h1>
+        <h1 class="down">n</h1>
+        <h1 class="up">e</h1>
+        <h1 class="down">r</h1>
+        <h1 class="up">a</h1>
+        <h1 class="down">r</h1>
+        <h1 class="up">y</h1>
+      </div>
+      <hr />
+
+      <div class="addCards">
+        <div class="card add">
+          <a href=""
+            ><button type="button" id="addCardText">
+              + Add An Itinerary
+            </button></a
+          >
+        </div>
+
+        <div class="card">
+          <div class="input-box">
+            <label for="title"> Title </label>
+            <input type="text" id="title" value="New York Trip" readonly />
+          </div>
+          <div class="input-box">
+            <label for="date">Date</label>
+            <input type="text" id="date" value="08/23/23 - 08/30/23" readonly />
+          </div>
+          <div class="input-box">
+            <label for="location">Location</label>
+            <input
+              type="text"
+              id="location"
+              value="New York City, New York"
+              readonly
+            />
+          </div>
+          <div class="buttons">
+            <a href=""><button type="button" id="edit">Edit</button></a>
+            <a href=""><button type="button" id="delete">Delete</button></a>
+            <a href=""><button type="button" id="view">View</button></a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

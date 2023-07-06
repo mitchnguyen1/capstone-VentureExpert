@@ -37,6 +37,8 @@ input {
   font-style: normal;
   color: #04b2a6;
   -webkit-text-stroke: 0.5px black;
+  border-radius: 50px;
+  padding-left: 1vw;
 }
 .box {
   display: flex;
