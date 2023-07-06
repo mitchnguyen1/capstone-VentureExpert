@@ -1,0 +1,185 @@
+
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+body {
+  background-image: url("../img/pattern.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: black;
+}
+body::after {
+  content: "";
+  position: absolute;
+  top: 5px; 
+  right: 5px;
+  bottom: 5px;
+  left: 5px;
+  border: 10px solid white;
+  border-radius: 10px;
+  pointer-events: none; 
+  z-index: 0;
+}
+.wave {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    transform: rotate(180deg);
+    z-index: 4;
+}
+
+.wave svg {
+    position: relative;
+    display: block;
+    width: calc(138% + 1.3px);
+    height: 161px;
+}
+
+.wave .shape-fill {
+    fill: #ECB3FF;
+}
+.custom-shape-divider-top-1688659797 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    z-index: 3;
+}
+
+.custom-shape-divider-top-1688659797 svg {
+    position: relative;
+    display: block;
+    width: calc(119% + 1.3px);
+    height: 212px;
+}
+
+.custom-shape-divider-top-1688659797 .shape-fill {
+    fill: #E18AFE;
+}
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    padding: 10px;
+    color: #ff0000;
+    width: 90%;
+    margin: -3vh auto; 
+    background-color: transparent;
+    z-index: 5;
+    position:relative;
+  }
+
+ 
+  .navbar-brand {
+    font-size: 50px;
+    font-weight: bold;
+    text-decoration: none;
+    font-family: "vendetta", serif;
+    font-weight: 700;
+    font-style: normal;
+  }
+
+
+  .navbar-right {
+    display: flex;
+    align-items: center;
+    color: #333;
+    font-size: 40px;
+    font-weight: bold;
+    text-decoration: none;
+    font-family: "vendetta", serif;
+    font-weight: 700;
+    font-style: normal;
+
+  }
+
+
+  .navbar-right span {
+    margin-right: 10px;
+  }
+
+
+  .logout-button {
+    padding: 8px 12px;
+    background-color: transparent;
+    color: #333;
+    border-radius: 4px;
+    text-decoration: none;
+  }
+
+  .itinerary {
+    text-align: center;
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -35%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 6; 
+    width: 100%;
+  }
+  
+
+  h1 {
+    font-size: 10vh;
+    font-family: "citizen", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    padding: 1.5vh 1vh;
+    margin: 0;
+    text-shadow: 7px 10px 3px #020200;
+    color: #fed350;
+    -webkit-text-stroke: 4px #fdf889;
+    background-image: url("../img/wood.png");
+    background-position: center;
+    background-size: cover;
+    border: 1px solid #4b2615;
+  }
+
+  .title {
+    display: flex;
+    flex-direction: row;
+      margin-top: -5vh;
+  }
+  
+  .down {
+    position: relative;
+    top: 0.75vh;
+  }
+  
+  .up {
+    position: relative;
+    bottom: 0.75vh;
+  }
+
+  hr {
+    width: 75%;
+    height: 10px;
+    background-color: black;
+  }
+  .addCards{
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+  }
+  
+  .card{
+    display: block;
+    width: 100%;
+    border: 3px solid black;
+  }
+  .list{
+    list-style: none;
+  }
