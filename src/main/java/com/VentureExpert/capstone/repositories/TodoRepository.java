@@ -13,8 +13,9 @@ import java.util.Optional;
 
 @Repository
 public interface TodoRepository extends JpaRepository<Todo,Integer> {
-    @Query(value = "SELECT * FROM public.todo AS t JOIN public.location AS l ON t.location_id = l.location_id WHERE t.itinerary_id = :itineraryId", nativeQuery = true)
+    @Query(value = "SELECT * FROM public.todo AS t JOIN public.location AS l ON t.location_id = l.location_id WHERE t.itinerary_id = :itineraryId ORDER BY t.date, t.start", nativeQuery = true)
     List<Map<String, Object>> findAllByItinerary(@Param("itineraryId") Integer itineraryId);
+
 
     @Query(value = "SELECT * FROM public.todo AS t JOIN public.location AS l ON t.location_id = l.location_id WHERE t.todo_id = :todoId", nativeQuery = true)
     List<Map<String, Object>> findByTodoId(@Param("todoId") Integer todoId);

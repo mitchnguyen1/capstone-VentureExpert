@@ -45,60 +45,62 @@
     </header>
     <section class="myModal">
 
-        <div id="myModal" class="modal card">
-            <p id="modalTitle">Add Activity</p>
-            <div class="modal-content">
-              <form action="" id="form">
-                <div class="input-box">
-                  <label for="modalTitleInput">Title:</label>
-                  <input type="text" id="modalTitleInput" />
+      <div id="myModal" class="modal card">
+        <form action="" id="form">
+          <p id="modalTitle">Add Activity</p>
+          <div class="modal-content">
+            <div class="input-box">
+              <label for="modalTitleInput">Title:</label>
+              <input type="text" id="modalTitleInput" />
+            </div>
+            <div class="input-box">
+              <label for="modalDateInput">Date:</label>
+              <input type="date" id="modalDateInput" min="2023-01-01" max="2100-12-31" />
+            </div>
+            <div class="input-box">
+              <div class="date-inputs">
+                <div class="date-input">
+                  <label for="modalStartInput">Start:</label>
+                  <input type="time" id="modalStartInput" />
                 </div>
-                <div class="input-box">
-                  <label for="modalDateInput">Date:</label>
-                  <input type="date" id="modalDateInput" min="2023-01-01" max="2100-12-31" />
+                <div class="date-input">
+                  <label for="modalEndInput">End:</label>
+                  <input type="time" id="modalEndInput" />
                 </div>
-                <div class="input-box">
-                  <div class="date-inputs">
-                    <div class="date-input">
-                      <label for="modalStartInput">Start:</label>
-                      <input type="time" id="modalStartInput" />
-                    </div>
-                    <div class="date-input">
-                      <label for="modalEndInput">End:</label>
-                      <input type="time" id="modalEndInput" />
-                    </div>
-                  </div>
+              </div>
+            </div>
+            <div class="input-box">
+              <div class="location-inputs">
+                <div class="location-input">
+                  <label for="modalAddressInput">Address:</label>
+                  <input type="text" id="modalAddressInput" />
                 </div>
-                <div class="input-box">
-                  <div class="location-inputs">
-                    <div class="location-input">
-                      <label for="modalAddressInput">Address:</label>
-                      <input type="text" id="modalAddressInput" />
-                    </div>
-                    <div class="location-input">
-                      <label for="modalCityInput">City:</label>
-                      <input type="text" id="modalCityInput" />
-                    </div>
-                    <div class="location-input">
-                      <label for="modalStateInput">State:</label>
-                      <input type="text" id="modalStateInput" />
-                    </div>
-                    <div class="location-input">
-                      <label for="modalZipcodeInput">Zipcode:</label>
-                      <input type="text" id="modalZipcodeInput" />
-                    </div>
-                  </div>
+                <div class="location-input">
+                  <label for="modalCityInput">City:</label>
+                  <input type="text" id="modalCityInput" />
                 </div>
-                <div class="input-box">
-                  <label for="modalCostInput">Cost:</label>
-                  <input type="text" id="modalCostInput" />
+                <div class="location-input">
+                  <label for="modalStateInput">State:</label>
+                  <input type="text" id="modalStateInput" />
                 </div>
-                <div class="input-box">
-                  <button type="button" id="modalSubmitButton">Submit</button>
+                <div class="location-input">
+                  <label for="modalZipcodeInput">Zipcode:</label>
+                  <input type="text" id="modalZipcodeInput" />
                 </div>
-              </form>
+              </div>
+            </div>
+            <div class="input-box">
+              <label for="modalCostInput">Cost:</label>
+              <input type="text" id="modalCostInput" />
+            </div>
+            <div class="box">
+              <button type="button" id="close">Close</button>
+              <button type="submit" id="submit">Submit</button>
             </div>
           </div>
+        </form>
+      </div>
+      
           
 
     </section>
@@ -126,6 +128,7 @@
       <h1>Todo:</h1>
       <hr>
       <section class="todo">
+        
         <div class="card add">
             <a href=""
               ><button type="button" id="addCardText">

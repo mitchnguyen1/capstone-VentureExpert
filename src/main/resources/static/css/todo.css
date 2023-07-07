@@ -1,7 +1,7 @@
 html,
 body {
   margin: 0;
-  overflow-x: none;
+  overflow-x: hidden;
 }
 
 body {
@@ -126,4 +126,5 @@ main{
 } */
 .myModal{
     display: none;
+    z-index: 2;
 }
