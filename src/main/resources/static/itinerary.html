@@ -38,57 +38,66 @@
         <div class="navbar">
           <a href="itinerary.html" class="navbar-brand">Home</a>
           <div class="navbar-right">
-            <p>Welcome, <span id="fullName">John Smith!</span></p>
+            <p>Welcome<span id="fullName"></span></p>
 
-            <a href="#" class="logout-button">Logout?</a>
+            <a href="#" class="logout-button" onclick="handleLogout()">Logout?</a>
           </div>
         </div>
       </nav>
     </header>
 
     <div id="myModal" class="modal card">
-  <p id="modalTitle">Add Itinerary</p>
-  <div class="modal-content">
-    <form action="" id="form">
-      <div class="input-box">
-        <label for="modalTitleInput">Title:</label>
-        <input type="text" id="modalTitleInput" />
-      </div>
-      <div class="input-box">
-        <div class="date-inputs">
-          <div class="date-input">
-            <label for="modalStartInput">Start:</label>
-            <input type="date" id="modalStartInput" min="2023-01-01" max="2100-12-31" />
+      <p id="modalTitle">Add Itinerary</p>
+      <div class="modal-content">
+        <form action="" id="form">
+          <div class="input-box">
+            <label for="modalTitleInput">Title:</label>
+            <input type="text" id="modalTitleInput" />
           </div>
-          <div class="date-input">
-            <label for="modalEndInput">End:</label>
-            <input type="date" id="modalEndInput" min="2023-01-01" max="2100-12-31" />
+          <div class="input-box">
+            <div class="date-inputs">
+              <div class="date-input">
+                <label for="modalStartInput">Start:</label>
+                <input
+                  type="date"
+                  id="modalStartInput"
+                  min="2023-01-01"
+                  max="2100-12-31"
+                />
+              </div>
+              <div class="date-input">
+                <label for="modalEndInput">End:</label>
+                <input
+                  type="date"
+                  id="modalEndInput"
+                  min="2023-01-01"
+                  max="2100-12-31"
+                />
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      <div class="input-box">
-        <div class="location-inputs">
-          <div class="location-input">
-            <label for="modalCityInput">City:</label>
-            <input type="text" id="modalCityInput" />
+          <div class="input-box">
+            <div class="location-inputs">
+              <div class="location-input">
+                <label for="modalCityInput">City:</label>
+                <input type="text" id="modalCityInput" />
+              </div>
+              <div class="location-input">
+                <label for="modalStateInput">State:</label>
+                <input type="text" id="modalStateInput" />
+              </div>
+            </div>
           </div>
-          <div class="location-input">
-            <label for="modalStateInput">State:</label>
-            <input type="text" id="modalStateInput" />
-          </div>
-        </div>
-      </div>
-      <!-- Rest of your code -->
+          <!-- Rest of your code -->
 
-      <div id="error"></div>
-      <div class="box">
-        <button type="button" id="close">Close</button>
-        <button type="submit" id="submit">Submit</button>
+          <div id="error"></div>
+          <div class="box">
+            <button type="button" id="close">Close</button>
+            <button type="submit" id="submit">Submit</button>
+          </div>
+        </form>
       </div>
-    </form>
-  </div>
-</div>
-
+    </div>
 
     <section class="itinerary">
       <div class="title">
@@ -107,36 +116,15 @@
       <div class="addCards">
         <div class="card add">
           <a href=""
-            ><button type="button" id="addCardText">
-              + Add An Itinerary
-            </button></a
+            ><button type="button" id="addCardText">+ Add Itinerary</button></a
           >
         </div>
 
-        <div class="card">
-          <div class="input-box">
-            <label for="title">Title</label>
-            <p id="title">New York Trip</p>
-          </div>
-          <div class="input-box">
-            <label for="date">Date</label>
-            <p id="date">08/23/23 - 08/30/23</p>
-          </div>
-          <div class="input-box">
-            <label for="location">Location</label>
-            <p id="location">New York City, New York</p>
-          </div>
-          <div class="buttons">
-            <a href=""><button type="button" id="edit">Edit</button></a>
-            <a href=""><button type="button" id="delete">Delete</button></a>
-            <a href=""><button type="button" id="view">View</button></a>
-          </div>
-        </div>
+
+
         
-
-
-
       </div>
     </section>
+    <script src="js/itinerary.js"></script>
   </body>
 </html>

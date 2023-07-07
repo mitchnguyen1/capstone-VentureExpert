@@ -61,11 +61,19 @@ public class UserServiceImpl implements UserService {
             } else {
                 response.add("Incorrect username or password");
             }
+        } else {
+            response.add("Incorrect email or password");
         }
-            else{
-                response.add("Incorrect email or password");
-            }
-            return response;
-        }
+        return response;
     }
+
+    @Override
+    public String getUserFullNameById(Integer id) {
+        Optional<User> userOptional = userRepository.findById(id);
+        if(userOptional.isPresent()){
+            return userOptional.get().getFullName();
+        }
+    return "";
+    }
+}
 

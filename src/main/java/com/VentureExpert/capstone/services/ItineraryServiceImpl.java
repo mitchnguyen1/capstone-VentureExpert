@@ -2,7 +2,6 @@ package com.VentureExpert.capstone.services;
 
 import com.VentureExpert.capstone.entities.Itinerary;
 import com.VentureExpert.capstone.entities.Location;
-import com.VentureExpert.capstone.entities.Todo;
 import com.VentureExpert.capstone.entities.User;
 import com.VentureExpert.capstone.repositories.ItineraryRepository;
 import com.VentureExpert.capstone.repositories.LocationRepository;
@@ -11,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
-import java.sql.Time;
 import java.util.*;
 
 @Service
@@ -100,6 +98,7 @@ public class ItineraryServiceImpl implements ItineraryService {
         });
 
     }
+
 
     @Override
     public void deleteItineraryById(Integer id) {

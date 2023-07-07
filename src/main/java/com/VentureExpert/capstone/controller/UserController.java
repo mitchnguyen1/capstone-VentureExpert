@@ -1,14 +1,17 @@
 package com.VentureExpert.capstone.controller;
 
 import com.VentureExpert.capstone.dtos.UserDTO;
+import com.VentureExpert.capstone.entities.User;
 import com.VentureExpert.capstone.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/v1/users")
 public class UserController {
 
@@ -31,4 +34,8 @@ public class UserController {
     }
 
 
+    @GetMapping("/findById/{id}")
+    public String getUserById(@PathVariable Integer id){
+        return userService.getUserFullNameById(id);
+    }
 }

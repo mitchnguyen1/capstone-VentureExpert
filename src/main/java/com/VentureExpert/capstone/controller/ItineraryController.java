@@ -39,4 +39,5 @@ public class ItineraryController {
     public void updateItinerary(@RequestBody Map<String, String> json){
         itineraryService.updateItinerary(json);
     }
+
 }

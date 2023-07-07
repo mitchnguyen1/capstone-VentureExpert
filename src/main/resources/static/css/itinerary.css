@@ -193,7 +193,7 @@ body {
     margin-top: auto;
     margin-right: 2vw;
   }
-  .buttons button{
+  button{
     color: white;
     -webkit-text-stroke: 2px black;
   }
@@ -208,26 +208,7 @@ body {
     margin-left: 0.5vw;
     padding: 1vh 1vw;
   }
-  #edit{
-    background-color: blue;
-  }
-  #edit:hover{
-
-  }
-  #delete{
-    background-color: red;
-  }
-
-  #delete:hover{
-
-  }
-
-  #view{
-    background-color: green;
-  }
-  #view:hover{
-
-  }
+  
   .add{
     color:grey;
     border: 3px dotted grey;
@@ -352,9 +333,6 @@ body {
 
   }
 
-  /* .itinerary{
-    display: none;
-  } */
   .modal{
     display: none;
   }

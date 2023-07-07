@@ -8,24 +8,23 @@
     <link rel="stylesheet" href="https://use.typekit.net/acn1fkj.css" />
   </head>
   <body>
-
     <div class="menu">
-        <div class="title">
-            <h1 class="up">V</h1>
-            <h1 class="down">e</h1>
-            <h1 class="up">n</h1>
-            <h1 class="down">t</h1>
-            <h1 class="up">u</h1>
-            <h1 class="down">r</h1>
-            <h1 class="up">e</h1>
-            <h2 class="space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h2>
-            <h1 class="up">E</h1>
-            <h1 class="down">x</h1>
-            <h1 class="up">p</h1>
-            <h1 class="down">e</h1>
-            <h1 class="up">r</h1>
-            <h1 class="down">t</h1>
-          </div>
+      <div class="title">
+        <h1 class="up">V</h1>
+        <h1 class="down">e</h1>
+        <h1 class="up">n</h1>
+        <h1 class="down">t</h1>
+        <h1 class="up">u</h1>
+        <h1 class="down">r</h1>
+        <h1 class="up">e</h1>
+        <h2 class="space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h2>
+        <h1 class="up">E</h1>
+        <h1 class="down">x</h1>
+        <h1 class="up">p</h1>
+        <h1 class="down">e</h1>
+        <h1 class="up">r</h1>
+        <h1 class="down">t</h1>
+      </div>
       <div class="subtitle">
         <h6>Track Your <span class="highlight">Itinerary,</span></h6>
         <h6>Live Your <span class="highlight">Adventure</span></h6>
@@ -34,7 +33,15 @@
         <a href="login.html"><button id="login">Login</button></a>
         <a href="register.html"><button id="register">Register</button></a>
       </div>
-      
     </div>
+    <script>
+      //Grab cookie and user ID from cookie
+      const cookieArr = document.cookie.split(";");
+      const userId = cookieArr[0].split("=")[1];
+      //edge case for logged in user
+      if (userId != undefined) {
+        window.location.replace("http://localhost:8080/itinerary.html");
+      }
+    </script>
   </body>
 </html>
