@@ -82,21 +82,20 @@ public class TodoServiceImpl implements TodoService{
     @Override
     public void updateTodo(Map<String, String> json) {
 
-        // update location
-        Optional<Location> newLocation = locationRepository.findById(Integer.valueOf(json.get("location_id")));
-        newLocation.ifPresent(location -> {
-            location.setState(json.get("state"));
-            location.setCity(json.get("city"));
-            location.setAddress(json.get("address"));
-            location.setZipcode(Integer.valueOf(json.get("zipcode")));
-            locationRepository.saveAndFlush(location);
-        });
+        Location newLocation = new Location();
+
+        // Add location
+        newLocation.setState(json.get("state"));
+        newLocation.setCity(json.get("city"));
+        newLocation.setAddress(json.get("address"));
+        newLocation.setZipcode(Integer.valueOf(json.get("zipcode")));
+        locationRepository.saveAndFlush(newLocation);
 
 
         //update todo
         Optional<Todo> newTodo = todoRepository.findById(Integer.valueOf(json.get("todo_id")));
         newTodo.ifPresent(todo -> {
-            todo.setLocation(newLocation.orElseThrow(() -> new IllegalArgumentException("Location with id: " + json.get("location_id") + " ,could not be found.") ));
+            todo.setLocation(newLocation);
             todo.setTitle(json.get("title"));
             todo.setDate(Date.valueOf(json.get("date")));
             //parse time

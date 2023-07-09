@@ -196,8 +196,6 @@ body {
   button{
     color: white;
     -webkit-text-stroke: 2px black;
-  }
-  button {
     width: min-content;
     font-size: 40px;
     font-family: "vendetta", serif;

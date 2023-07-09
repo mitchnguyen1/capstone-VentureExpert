@@ -7,11 +7,14 @@ const itinerary_id = cookieArr[1].split("=")[1];
 const itinTitle = document.getElementById("title");
 const itinDate = document.getElementById("date");
 const itinLocation = document.getElementById("location");
+const totalCost = document.getElementById("totalCost")
 
-//add todo elements
+//add todo/done elements
 const addTodoButton = document.getElementById("addCardText");
 const mainElement = document.querySelector("main");
 const closeTodobutton = document.getElementById("close");
+const todoSection = document.querySelector(".todo");
+const doneSection = document.querySelector(".done");
 
 //modal elements
 const modal = document.querySelector(".myModal");
@@ -27,9 +30,6 @@ const modalState = document.getElementById("modalStateInput");
 const modalZip = document.getElementById("modalZipcodeInput");
 const modalDate = document.getElementById("modalDateInput");
 const modalCost = document.getElementById("modalCostInput");
-
-//todo display elements
-const todoSection = document.querySelector(".todo");
 
 //Data for requests
 const baseUrl = "http://localhost:8080/api/v1";
@@ -57,7 +57,7 @@ async function getItinerary(itinerary_id) {
   }
 }
 
-//function to display the seleted itinerary
+//function to display the selected itinerary
 function displayItinerary(itin) {
   //handle date format
   let start = itin.start
@@ -74,7 +74,16 @@ function displayItinerary(itin) {
   itinDate.innerHTML = `${start} - ${end}`;
   itinLocation.innerHTML = `${itin.city}, ${itin.state}`;
 }
-
+//dislay total cost of the trip 
+function displayCost(data){
+  totalCost.innerHTML = ""
+  let total = 0;
+  data.forEach((item) => {
+    total += item.cost;
+    })
+  totalCost.innerHTML = `$${total}`
+  
+}
 //function to get all todos by itinerary
 async function getTodos(itineraryId) {
   try {
@@ -86,14 +95,15 @@ async function getTodos(itineraryId) {
       }
     );
     const data = await response.json();
-    displayCards(data);
+    displayCost(data);
+    createCards(data);
   } catch (err) {
     console.log(err.message);
   }
 }
 
-//function to display each todo card
-function displayCards(data) {
+//diplay cards to the todo section
+function displayTodoSection(cards) {
   //create add card
   todoSection.innerHTML = "";
 
@@ -110,72 +120,153 @@ function displayCards(data) {
   addButton.type = "button";
   addButton.id = "addCardText";
   addButton.textContent = "+ Add Itinerary";
-  addButton.addEventListener("click", displayAddTodo);
+  addButton.addEventListener("click", displayModal);
 
   anchorElement.appendChild(addButton);
   addItinerary.appendChild(anchorElement);
 
   todoSection.appendChild(addItinerary);
+  if (cards != null) {
+    cards.forEach((card) => {
+      todoSection.appendChild(card);
+    });
+  }
+}
 
+function displayDoneSection(cards) {
+  doneSection.innerHTML = "";
+  if (cards != null) {
+    cards.forEach((card) => {
+      doneSection.appendChild(card);
+    });
+  }
+}
+
+//function to create each todo card
+function createCards(data) {
+  let todoCards = [];
+  let doneCards = [];
   data.forEach((todo) => {
-    const todoItems = Object.entries(todo).map(([key, value]) => ({ key, value }));
+    const todoItems = Object.entries(todo).map(([key, value]) => ({
+      key,
+      value,
+    }));
 
-
-    
     //create the card and heading
-    let itinCard = document.createElement("div")
-    itinCard.classList.add("itinCard", "card")
+    let itinCard = document.createElement("div");
+    itinCard.classList.add("itinCard", "card");
 
-    let heading = document.createElement("h3")
-    heading.classList.add("card-header")
+    let heading = document.createElement("h3");
+    heading.classList.add("card-header");
     heading.innerHTML = todo.title;
 
-    itinCard.appendChild(heading)
+    itinCard.appendChild(heading);
 
     //create list and make for loop
-    let list = document.createElement("div")
-    list.classList.add("list")
+    let list = document.createElement("div");
+    list.id = todo.todo_id;
+    list.classList.add("list");
 
-    todoItems.forEach(item =>{
-        if(item.value == null){
-            return;
-        }
-        if(item.key == "itinerary_id" || item.key == "complete" ||item.key == "todo_id" ||item.key == "location_id"){
-            return;
-        }
+    todoItems.forEach((item) => {
+      if (item.value == null) {
+        return;
+      }
+      if (
+        item.key == "itinerary_id" ||
+        item.key == "complete" ||
+        item.key == "todo_id" ||
+        item.key == "location_id"
+      ) {
+        return;
+      }
 
-        let listDiv = document.createElement("div")
-        listDiv.classList.add("list-item-container")
+      let listDiv = document.createElement("div");
+      listDiv.classList.add("list-item-container");
 
-        let label = document.createElement("label")
-        const newLabel = item.key.charAt(0).toUpperCase() + item.key.slice(1);
-        label.innerHTML = newLabel
-        listDiv.appendChild(label)
+      let label = document.createElement("label");
+      const newLabel = item.key.charAt(0).toUpperCase() + item.key.slice(1);
+      label.innerHTML = newLabel;
+      listDiv.appendChild(label);
 
-        let para = document.createElement("p")
-        para.classList.add("list-item")
-        para.innerText = item.value;
-        listDiv.appendChild(para)
+      let para = document.createElement("p");
+      para.classList.add("list-item");
+      para.innerText = item.value;
+      listDiv.appendChild(para);
 
-        list.appendChild(listDiv)
-    })
+      list.appendChild(listDiv);
+    });
 
-    itinCard.appendChild(list)
-    todoSection.appendChild(itinCard)
+    itinCard.appendChild(list);
+    // Create the buttons div
+    const buttonsDiv = document.createElement("div");
+    buttonsDiv.classList.add("buttons");
+    buttonsDiv.id = todo.todo_id;
 
+    //Create the complete checkbox
+    const completeCheckbox = document.createElement("button");
+    completeCheckbox.type = "button";
+    completeCheckbox.classList.add(`${todo.complete}`,"complete-button");
+    completeCheckbox.textContent = "Complete?";
+
+    completeCheckbox.addEventListener("click", handleComplete);
+
+    // Create the edit button
+    const editButton = document.createElement("button");
+    editButton.type = "button";
+    editButton.classList.add("edit-button");
+    editButton.textContent = "Edit";
+
+    editButton.addEventListener("click", handleEdit);
+
+    // Create the delete button
+    const deleteButton = document.createElement("button");
+    deleteButton.type = "button";
+    deleteButton.classList.add("delete-button");
+    deleteButton.textContent = "Delete";
+
+    deleteButton.addEventListener("click", handleDelete);
+
+    // Append the buttons to the buttons div
+    buttonsDiv.appendChild(completeCheckbox)
+    buttonsDiv.appendChild(editButton);
+    buttonsDiv.appendChild(deleteButton);
+
+
+    itinCard.appendChild(buttonsDiv);
+
+    //handle if to display in todo or done
+    const completeItem = todoItems.find((item) => item.key === "complete");
+    if (completeItem.value == false) {
+      todoCards.push(itinCard);
+    } else {
+      doneCards.push(itinCard);
+    }
   });
+
+  displayTodoSection(todoCards);
+  displayDoneSection(doneCards);
 }
 
 //function to display add modal
-function displayAddTodo(e) {
+function displayModal(e) {
   e.preventDefault();
   mainElement.style.display = "none";
   modal.style.display = "block";
 }
 
 //function to hide add modal
-function closeAddTodo(e) {
+function closeModal(e) {
   e.preventDefault();
+  modalTitle.value =  ""
+  modalDate.value =  ""
+  modalStart.value =  ""
+  modalEnd.value = ""
+  modalAddress.value =  ""
+  modalCity.value =  ""
+  modalState.value =  ""
+  modalZip.value =  ""
+  modalCost.value = ""
+  modalContent.id =  ""
   mainElement.style.display = "block";
   modal.style.display = "none";
 }
@@ -203,7 +294,7 @@ async function addTodo(e) {
       headers: headers,
     });
     if (response.status === 200) {
-      closeAddTodo(e);
+      closeModal(e);
       getTodos(itinerary_id);
     }
   } catch (err) {
@@ -211,8 +302,102 @@ async function addTodo(e) {
   }
 }
 
+//itinerary buttons functions
+async function handleEdit(e) {
+  let todo_id = e.target.parentNode.id;
+  displayModal(e);
+  await fetch(`${baseUrl}/todo/getById/${todo_id}`, {
+    method: "GET",
+    headers: headers,
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      let currItin = data[0]
+      modalTitle.value = currItin.title;
+      modalDate.value = currItin.date;
+      modalStart.value = currItin.start;
+      modalEnd.value = currItin.end;
+      modalAddress.value = currItin.address;
+      modalCity.value = currItin.city;
+      modalState.value = currItin.state;
+      modalZip.value = currItin.zipcode;
+      modalCost.value = currItin.cost;
+      modalContent.id = todo_id;
+    })
+    .catch((err) => console.log(err.message));
+}
+
+//handle submit for edit
+async function handleEditSubmission(e) {
+  e.preventDefault();
+  let body = {
+    todo_id: modalContent.id,
+    itinerary_id: itinerary_id,
+    date: modalDate.value,
+    title: modalTitle.value,
+    start: modalStart.value,
+    end: modalEnd.value,
+    address: modalAddress.value,
+    cost: modalCost.value,
+    city: modalCity.value,
+    state: modalState.value,
+    zipcode: modalZip.value,
+    complete: false
+  };
+  await fetch(`${baseUrl}/todo/update/`, {
+    method: "PUT",
+    body: JSON.stringify(body),
+    headers: headers,
+  })
+    .then(() => {
+      closeModal(e);
+      getTodos(itinerary_id);
+    })
+    .catch((err) => console.log(err.message));
+}
+//handle delete todo
+async function handleDelete(e) {
+    e.preventDefault()
+    let todo_id = e.target.parentNode.id;
+    await fetch(`${baseUrl}/todo/delete/${todo_id}`, {
+        method: "DELETE",
+        headers: headers,
+      }).catch((err) => console.log(err.message));
+    
+    return getTodos(itinerary_id);
+}
+
+//update complete
+async function handleComplete(e){
+  e.preventDefault();
+  let complete = e.target.classList[0]
+  let id = e.target.parentNode.id
+  if(complete === "true"){
+    e.target.classList[0] = "false"
+    complete = false;
+  }else{
+    e.target.classList[0] = "true"
+    complete = true;
+  }
+  await fetch(`${baseUrl}/todo/updateComplete/?todo_id=${id}&complete=${complete}`, {
+    method: "PUT",
+    headers: headers,
+  })
+  getTodos(itinerary_id);
+}
+
+//function to switch from edit or add for modal
+function modalType(e) {
+  e.preventDefault();
+  if (modalContent.id != "") {
+    handleEditSubmission(e);
+  } else {
+    addTodo(e);
+  }
+}
+
 getItinerary(itinerary_id);
 getTodos(itinerary_id);
-addTodoButton.addEventListener("click", displayAddTodo);
-closeTodobutton.addEventListener("click", closeAddTodo);
-modalForm.addEventListener("submit", addTodo);
+addTodoButton.addEventListener("click", displayModal);
+closeTodobutton.addEventListener("click", closeModal);
+modalForm.addEventListener("submit", modalType);
