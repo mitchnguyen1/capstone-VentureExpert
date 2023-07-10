@@ -3,14 +3,13 @@ const cookieArr = document.cookie.split("=");
 const userId = cookieArr[1];
 // Retrieve the itinerary_id from the URL parameters
 const urlParams = new URLSearchParams(window.location.search);
-const itinerary_id = urlParams.get('itinerary_id');
-// const itinerary_id = cookieArr[1].split("=")[1];
-console.log(itinerary_id)
+const itinerary_id = urlParams.get("itinerary_id");
+
 //itinerary card elements
 const itinTitle = document.getElementById("title");
 const itinDate = document.getElementById("date");
 const itinLocation = document.getElementById("location");
-const totalCost = document.getElementById("totalCost")
+const totalCost = document.getElementById("totalCost");
 
 //add todo/done elements
 const addTodoButton = document.getElementById("addCardText");
@@ -18,7 +17,8 @@ const mainElement = document.querySelector("main");
 const closeTodobutton = document.getElementById("close");
 const todoSection = document.querySelector(".todo");
 const doneSection = document.querySelector(".done");
-
+//Grab element for user's name
+const nameTextBox = document.getElementById("fullName");
 //modal elements
 const modal = document.querySelector(".myModal");
 const modalContent = document.querySelector(".modal-content");
@@ -40,6 +40,42 @@ const headers = {
   "Content-type": "application/json",
 };
 
+if (userId == undefined) {
+  console.log(userId);
+  window.location.replace("http://localhost:8080/index.html");
+}
+
+//Get User's info
+const getUser = async (userId) => {
+  await fetch(`${baseUrl}/users/findById/${userId}`, {
+    method: "GET",
+    headers: headers,
+  })
+    .then((response) => response.text())
+    .then((data) => displayName(data))
+    .catch((err) => console.log(err.message));
+};
+
+//display user's name
+const displayName = (data) => {
+  nameTextBox.innerHTML = "";
+  if (data.length >= 10) {
+    let words = data.split(" ");
+    nameTextBox.innerHTML = ", " + words[0] + "!";
+  } else {
+    nameTextBox.innerHTML = ", " + data + "!";
+  }
+};
+
+//logout function
+function handleLogout() {
+  let c = document.cookie.split(";");
+  for (let i in c) {
+    document.cookie =
+      /^[^=]+/.exec(c[i])[0] + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+  }
+  window.location.replace("http://localhost:8080/index.html");
+}
 //async function to get all itinery from user
 async function getItinerary(itinerary_id) {
   try {
@@ -77,15 +113,14 @@ function displayItinerary(itin) {
   itinDate.innerHTML = `${start} - ${end}`;
   itinLocation.innerHTML = `${itin.city}, ${itin.state}`;
 }
-//dislay total cost of the trip 
-function displayCost(data){
-  totalCost.innerHTML = ""
+//dislay total cost of the trip
+function displayCost(data) {
+  totalCost.innerHTML = "";
   let total = 0;
   data.forEach((item) => {
     total += item.cost;
-    })
-  totalCost.innerHTML = `$${total}`
-  
+  });
+  totalCost.innerHTML = `$${total}`;
 }
 //function to get all todos by itinerary
 async function getTodos(itineraryId) {
@@ -122,13 +157,14 @@ function displayTodoSection(cards) {
   const addButton = document.createElement("button");
   addButton.type = "button";
   addButton.id = "addCardText";
-  addButton.textContent = "+ Add Itinerary";
+  addButton.textContent = "+ Add Activity";
   addButton.addEventListener("click", displayModal);
 
   anchorElement.appendChild(addButton);
   addItinerary.appendChild(anchorElement);
 
   todoSection.appendChild(addItinerary);
+
   if (cards != null) {
     cards.forEach((card) => {
       todoSection.appendChild(card);
@@ -154,7 +190,22 @@ function createCards(data) {
       key,
       value,
     }));
-
+    // Sort the todoItems array based on specific keys
+    todoItems.sort((a, b) => {
+      const keysOrder = [
+        "address",
+        "city",
+        "state",
+        "zipcode",
+        "date",
+        "start",
+        "end",
+        "cost",
+      ];
+      const indexA = keysOrder.indexOf(a.key);
+      const indexB = keysOrder.indexOf(b.key);
+      return indexA - indexB;
+    });
     //create the card and heading
     let itinCard = document.createElement("div");
     itinCard.classList.add("itinCard", "card");
@@ -178,7 +229,8 @@ function createCards(data) {
         item.key == "itinerary_id" ||
         item.key == "complete" ||
         item.key == "todo_id" ||
-        item.key == "location_id"
+        item.key == "location_id" ||
+        item.key == "title"
       ) {
         return;
       }
@@ -193,7 +245,12 @@ function createCards(data) {
 
       let para = document.createElement("p");
       para.classList.add("list-item");
-      para.innerText = item.value;
+      if(item.key == "cost"){
+        para.innerText = `$${item.value}`;
+      }
+      else{
+        para.innerText = item.value;
+      }
       listDiv.appendChild(para);
 
       list.appendChild(listDiv);
@@ -208,7 +265,7 @@ function createCards(data) {
     //Create the complete checkbox
     const completeCheckbox = document.createElement("button");
     completeCheckbox.type = "button";
-    completeCheckbox.classList.add(`${todo.complete}`,"complete-button");
+    completeCheckbox.classList.add(`${todo.complete}`, "complete-button");
     completeCheckbox.textContent = "Complete?";
 
     completeCheckbox.addEventListener("click", handleComplete);
@@ -230,10 +287,9 @@ function createCards(data) {
     deleteButton.addEventListener("click", handleDelete);
 
     // Append the buttons to the buttons div
-    buttonsDiv.appendChild(completeCheckbox)
+    buttonsDiv.appendChild(completeCheckbox);
     buttonsDiv.appendChild(editButton);
     buttonsDiv.appendChild(deleteButton);
-
 
     itinCard.appendChild(buttonsDiv);
 
@@ -260,16 +316,16 @@ function displayModal(e) {
 //function to hide add modal
 function closeModal(e) {
   e.preventDefault();
-  modalTitle.value =  ""
-  modalDate.value =  ""
-  modalStart.value =  ""
-  modalEnd.value = ""
-  modalAddress.value =  ""
-  modalCity.value =  ""
-  modalState.value =  ""
-  modalZip.value =  ""
-  modalCost.value = ""
-  modalContent.id =  ""
+  modalTitle.value = "";
+  modalDate.value = "";
+  modalStart.value = "";
+  modalEnd.value = "";
+  modalAddress.value = "";
+  modalCity.value = "";
+  modalState.value = "";
+  modalZip.value = "";
+  modalCost.value = "";
+  modalContent.id = "";
   mainElement.style.display = "block";
   modal.style.display = "none";
 }
@@ -315,7 +371,7 @@ async function handleEdit(e) {
   })
     .then((response) => response.json())
     .then((data) => {
-      let currItin = data[0]
+      let currItin = data[0];
       modalTitle.value = currItin.title;
       modalDate.value = currItin.date;
       modalStart.value = currItin.start;
@@ -345,7 +401,7 @@ async function handleEditSubmission(e) {
     city: modalCity.value,
     state: modalState.value,
     zipcode: modalZip.value,
-    complete: false
+    complete: false,
   };
   await fetch(`${baseUrl}/todo/update/`, {
     method: "PUT",
@@ -360,32 +416,35 @@ async function handleEditSubmission(e) {
 }
 //handle delete todo
 async function handleDelete(e) {
-    e.preventDefault()
-    let todo_id = e.target.parentNode.id;
-    await fetch(`${baseUrl}/todo/delete/${todo_id}`, {
-        method: "DELETE",
-        headers: headers,
-      }).catch((err) => console.log(err.message));
-    
-    return getTodos(itinerary_id);
+  e.preventDefault();
+  let todo_id = e.target.parentNode.id;
+  await fetch(`${baseUrl}/todo/delete/${todo_id}`, {
+    method: "DELETE",
+    headers: headers,
+  }).catch((err) => console.log(err.message));
+
+  return getTodos(itinerary_id);
 }
 
 //update complete
-async function handleComplete(e){
+async function handleComplete(e) {
   e.preventDefault();
-  let complete = e.target.classList[0]
-  let id = e.target.parentNode.id
-  if(complete === "true"){
-    e.target.classList[0] = "false"
+  let complete = e.target.classList[0];
+  let id = e.target.parentNode.id;
+  if (complete === "true") {
+    e.target.classList[0] = "false";
     complete = false;
-  }else{
-    e.target.classList[0] = "true"
+  } else {
+    e.target.classList[0] = "true";
     complete = true;
   }
-  await fetch(`${baseUrl}/todo/updateComplete/?todo_id=${id}&complete=${complete}`, {
-    method: "PUT",
-    headers: headers,
-  })
+  await fetch(
+    `${baseUrl}/todo/updateComplete/?todo_id=${id}&complete=${complete}`,
+    {
+      method: "PUT",
+      headers: headers,
+    }
+  );
   getTodos(itinerary_id);
 }
 
@@ -398,7 +457,7 @@ function modalType(e) {
     addTodo(e);
   }
 }
-
+getUser(userId);
 getItinerary(itinerary_id);
 getTodos(itinerary_id);
 addTodoButton.addEventListener("click", displayModal);

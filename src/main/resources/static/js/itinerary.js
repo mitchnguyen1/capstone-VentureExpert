@@ -33,7 +33,6 @@ const headers = {
 
 // console.log(userId);
 if (userId == undefined) {
-  console.log(userId);
   window.location.replace("http://localhost:8080/index.html");
 }
 //logout function
