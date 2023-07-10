@@ -12,8 +12,8 @@ body {
   padding: 0;
   overflow-x: hidden;
   background-image: url("../img/lightblue.png");
-  background-size: cover;
-  background-repeat: no-repeat;
+  background-size: contain;
+  background-repeat: repeat;
   background-color: black;
   display: flex;
   flex-direction: column;
@@ -73,7 +73,7 @@ nav {
   color: #faeede;
 }
 .navbar-left a:hover{
-  color:#fcea63;
+  color:#f6c34c;
 }
 
 .navbar-right {
