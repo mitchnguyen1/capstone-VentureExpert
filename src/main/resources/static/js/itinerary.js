@@ -31,8 +31,9 @@ const headers = {
   "Content-type": "application/json",
 };
 
-
+// console.log(userId);
 if (userId == undefined) {
+  console.log(userId);
   window.location.replace("http://localhost:8080/index.html");
 }
 //logout function
@@ -327,11 +328,11 @@ async function handleDelete(e) {
 }
 
 function handleView(e) {
-  e.preventDefault()
+  e.preventDefault();
   let itinerary_id = e.target.parentNode.id;
-  document.cookie = `itinerary_id=${itinerary_id}`;
-  window.location.replace("http://localhost:8080/todo.html")
+  window.location.replace(`http://localhost:8080/todo.html?itinerary_id=${itinerary_id}`);
 }
+
 
 //function to switch from edit or add for modal
 function modalType(e) {

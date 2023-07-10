@@ -1,8 +1,11 @@
 //Grab cookie and user ID from cookie
-const cookieArr = document.cookie.split(";");
-const userId = cookieArr[0].split("=")[1];
-const itinerary_id = cookieArr[1].split("=")[1];
-
+const cookieArr = document.cookie.split("=");
+const userId = cookieArr[1];
+// Retrieve the itinerary_id from the URL parameters
+const urlParams = new URLSearchParams(window.location.search);
+const itinerary_id = urlParams.get('itinerary_id');
+// const itinerary_id = cookieArr[1].split("=")[1];
+console.log(itinerary_id)
 //itinerary card elements
 const itinTitle = document.getElementById("title");
 const itinDate = document.getElementById("date");

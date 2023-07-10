@@ -44,7 +44,7 @@ nav {
   align-items: center;
   background-color: #333;
   color: #ff0000;
-  margin: 0 auto;
+  margin: 1vh auto;
   background-color: transparent;
   z-index: 5;
   position: relative;
@@ -147,7 +147,9 @@ h1 {
 hr {
   width: 75%;
   height: 10px;
-  background-color: black;
+  background-color: #786a50;
+  border-radius: 10px;
+  border: 1px solid black;
 }
 .addCards {
   display: flex;
@@ -190,7 +192,7 @@ hr {
 }
 
 .welcome-content {
-  background-image: linear-gradient(45deg, #018177 21.43%, #017c74 21.43%, #017c74 50%, #018177 50%, #018177 71.43%, #017c74 71.43%, #017c74 100%);
+  background-image: linear-gradient(45deg, #7cc9c3 21.43%, #8ecfca 21.43%, #8ecfca 50%, #7cc9c3 50%, #7cc9c3 71.43%, #8ecfca 71.43%, #8ecfca 100%);
   background-size: 49.50px 49.50px;
   padding: 0 1vw;
 }
