@@ -333,23 +333,23 @@ margin: 0.5vh 0.5vw;
   background-image: linear-gradient(45deg, #f02745 21.43%, #febdc3 21.43%, #febdc3 50%, #f02745 50%, #f02745 71.43%, #febdc3 71.43%, #febdc3 100%);
   background-size: 49.50px 49.50px;
 }
-#submit, .view-button {
+#submit, .edit-button {
   -webkit-text-stroke: 1px black;
   background-color: #7bc9c2;
   color: white;
 }
-#submit:hover, .view-button:hover {
+#submit:hover, .edit-button:hover {
   background-image: linear-gradient(45deg, #7bc9c2 21.43%, #017c74 21.43%, #017c74 50%, #7bc9c2 50%, #7bc9c2 71.43%, #017c74 71.43%, #017c74 100%);
 background-size: 49.50px 49.50px;
 }
 
-.edit-button{
+.complete-button{
   -webkit-text-stroke: 1px black;
   background-color: #f8eebb;
   color: white;
 }
 
-.edit-button:hover{
+.complete-button:hover{
   background-image: linear-gradient(45deg, #f7d35a 21.43%, #f6c34c 21.43%, #f6c34c 50%, #f7d35a 50%, #f7d35a 71.43%, #f6c34c 71.43%, #f6c34c 100%);
 background-size: 49.50px 49.50px;
 }
@@ -398,7 +398,7 @@ font-size: 3vh;
   margin-right: 2vw;
 }
 .edit-button,.delete-button,.view-button,.complete-button {
-  -webkit-text-stroke: 0.5px black;
+  -webkit-text-stroke: 1px black;
   font-size: 3vh;
   padding: 1vh 1vw;
 }
@@ -411,5 +411,16 @@ margin: 0;
   margin: auto;
 }
 .true {
-  background-color: black;
+  background-color: #88c9a1;
+}
+.true:hover{
+  background-image: linear-gradient(45deg, #88c9a1 21.43%, #017c74 21.43%, #017c74 50%, #88c9a1 50%, #88c9a1 71.43%, #017c74 71.43%, #017c74 100%);
+background-size: 49.50px 49.50px;
+}
+
+.card-header{
+  font-family: "Humming", serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 3vh;
 }
