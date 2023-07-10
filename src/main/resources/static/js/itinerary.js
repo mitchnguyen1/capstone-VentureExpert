@@ -59,7 +59,12 @@ const getUser = async (userId) => {
 //display user's name
 const displayName = (data) => {
   nameTextBox.innerHTML = "";
-  nameTextBox.innerHTML = ", " + data + "!";
+  if(data.length >= 10){
+    let words = data.split(" ")
+    nameTextBox.innerHTML = ", " + words[0] + "!";
+  }else{
+    nameTextBox.innerHTML = ", " + data + "!";
+  }
 };
 
 //display modal to add itinerary
@@ -225,8 +230,7 @@ function displayCards(data) {
     editButton.type = "button";
     editButton.classList.add("edit-button");
     editButton.textContent = "Edit";
-    editButton.style.backgroundColor = "blue";
-    editButton.style.color = "white";
+
     editButton.addEventListener("click", handleEdit);
 
     // Create the delete button
@@ -234,8 +238,7 @@ function displayCards(data) {
     deleteButton.type = "button";
     deleteButton.classList.add("delete-button");
     deleteButton.textContent = "Delete";
-    deleteButton.style.backgroundColor = "red";
-    deleteButton.style.color = "white";
+
     deleteButton.addEventListener("click", handleDelete);
 
     // Create the view button
@@ -243,8 +246,7 @@ function displayCards(data) {
     viewButton.type = "button";
     viewButton.classList.add("view-button");
     viewButton.textContent = "View";
-    viewButton.style.backgroundColor = "green";
-    viewButton.style.color = "white";
+
     viewButton.addEventListener("click", handleView);
 
     // Append the buttons to the buttons div
