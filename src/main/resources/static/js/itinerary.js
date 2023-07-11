@@ -343,6 +343,11 @@ function modalType(e) {
   }
 }
 
+//function to auto fill end date input if start changes
+function endDateAutofill(e){
+  modalEnd.value = e.target.value;
+}
+
 getUser(userId);
 getItinerary(userId);
 logoutButton.addEventListener("click", handleLogout);

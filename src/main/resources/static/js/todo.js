@@ -457,6 +457,13 @@ function modalType(e) {
     addTodo(e);
   }
 }
+
+
+//function to handle autofill end time when start change
+function endDateAutofill(e){
+  modalEnd.value = e.target.value;
+}
+
 getUser(userId);
 getItinerary(itinerary_id);
 getTodos(itinerary_id);

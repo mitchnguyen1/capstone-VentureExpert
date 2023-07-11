@@ -67,13 +67,12 @@ nav {
   justify-content: flex-end;
 }
 
-
 .navbar-left a {
   -webkit-text-stroke: 0.5px black;
   color: #faeede;
 }
-.navbar-left a:hover{
-  color:#f6c34c;
+.navbar-left a:hover {
+  color: #f6c34c;
 }
 
 .navbar-right {
@@ -100,8 +99,8 @@ nav {
   text-decoration: none;
   -webkit-text-stroke: 0.5px black;
 }
-.logout-button:hover{
-  color:#9070a2;
+.logout-button:hover {
+  color: #9070a2;
 }
 
 .itinerary {
@@ -177,7 +176,7 @@ hr {
   margin-bottom: 1vh;
 }
 
-.input-box p{
+.input-box p {
   border: 2px black solid;
   background-color: white;
   border-radius: 50px;
@@ -193,12 +192,21 @@ hr {
 }
 
 .welcome-content {
-  background-image: linear-gradient(45deg, #febdc3 21.43%, #ebb9bd 21.43%, #ebb9bd 50%, #febdc3 50%, #febdc3 71.43%, #ebb9bd 71.43%, #ebb9bd 100%);
-  background-size: 49.50px 49.50px;
+  background-image: linear-gradient(
+    45deg,
+    #febdc3 21.43%,
+    #ebb9bd 21.43%,
+    #ebb9bd 50%,
+    #febdc3 50%,
+    #febdc3 71.43%,
+    #ebb9bd 71.43%,
+    #ebb9bd 100%
+  );
+  background-size: 49.5px 49.5px;
   padding: 0 1vw;
 }
 
- p {
+p {
   font-size: 3.5vh;
   font-family: "Humming", serif;
   font-weight: 700;
@@ -207,8 +215,6 @@ hr {
   margin: 0;
   -webkit-text-stroke: 1px black;
 }
-
-
 
 label {
   margin: 0;
@@ -235,7 +241,6 @@ input {
   border-radius: 50px;
   padding-left: 1vw;
   width: 100%;
-
 }
 
 .buttons {
@@ -262,8 +267,17 @@ button {
   color: grey;
   border: 3px dotted grey;
 }
-.add:hover{
-  background-image: linear-gradient(45deg, #fffae4 25%, #a8a8a8 25%, #a8a8a8 50%, #fffae4 50%, #fffae4 75%, #a8a8a8 75%, #a8a8a8 100%);
+.add:hover {
+  background-image: linear-gradient(
+    45deg,
+    #fffae4 25%,
+    #a8a8a8 25%,
+    #a8a8a8 50%,
+    #fffae4 50%,
+    #fffae4 75%,
+    #a8a8a8 75%,
+    #a8a8a8 100%
+  );
   background-size: 84.85px 84.85px;
   #addCardText {
     -webkit-text-stroke: 1px black;
@@ -330,10 +344,9 @@ button {
 
 .modal-content {
   margin: 1vh 1vw;
-
 }
 
-#form{
+#form {
   width: 100%;
 }
 
@@ -357,14 +370,16 @@ form label {
 .date-input input {
   box-sizing: border-box;
 }
+.location-inputs {
+  display: inline-flex;
+  justify-content: space-between;
+}
 
-.location-inputs,
 .location-input {
   display: inline-flex;
+  width: 100%;
 }
-.location-input input {
-  width: 50%;
-}
+
 #modalCityInput {
   width: max-content;
 }
@@ -374,37 +389,66 @@ form label {
   justify-content: flex-end;
   align-items: flex-end;
   margin-top: 2vh;
-
 }
-#close, .delete-button {
+#close,
+.delete-button {
   background-color: #f96776;
   -webkit-text-stroke: 1px black;
   color: white;
 }
-#close:hover, .delete-button:hover {
-
-  background-image: linear-gradient(45deg, #f02745 21.43%, #febdc3 21.43%, #febdc3 50%, #f02745 50%, #f02745 71.43%, #febdc3 71.43%, #febdc3 100%);
-  background-size: 49.50px 49.50px;
+#close:hover,
+.delete-button:hover {
+  background-image: linear-gradient(
+    45deg,
+    #f02745 21.43%,
+    #febdc3 21.43%,
+    #febdc3 50%,
+    #f02745 50%,
+    #f02745 71.43%,
+    #febdc3 71.43%,
+    #febdc3 100%
+  );
+  background-size: 49.5px 49.5px;
 }
-#submit, .view-button {
+#submit,
+.view-button {
   -webkit-text-stroke: 1px black;
   background-color: #7bc9c2;
   color: white;
 }
-#submit:hover, .view-button:hover {
-  background-image: linear-gradient(45deg, #7bc9c2 21.43%, #017c74 21.43%, #017c74 50%, #7bc9c2 50%, #7bc9c2 71.43%, #017c74 71.43%, #017c74 100%);
-background-size: 49.50px 49.50px;
+#submit:hover,
+.view-button:hover {
+  background-image: linear-gradient(
+    45deg,
+    #7bc9c2 21.43%,
+    #017c74 21.43%,
+    #017c74 50%,
+    #7bc9c2 50%,
+    #7bc9c2 71.43%,
+    #017c74 71.43%,
+    #017c74 100%
+  );
+  background-size: 49.5px 49.5px;
 }
 
-.edit-button{
+.edit-button {
   -webkit-text-stroke: 1px black;
   background-color: #f8eebb;
   color: white;
 }
 
-.edit-button:hover{
-  background-image: linear-gradient(45deg, #f7d35a 21.43%, #f6c34c 21.43%, #f6c34c 50%, #f7d35a 50%, #f7d35a 71.43%, #f6c34c 71.43%, #f6c34c 100%);
-background-size: 49.50px 49.50px;
+.edit-button:hover {
+  background-image: linear-gradient(
+    45deg,
+    #f7d35a 21.43%,
+    #f6c34c 21.43%,
+    #f6c34c 50%,
+    #f7d35a 50%,
+    #f7d35a 71.43%,
+    #f6c34c 71.43%,
+    #f6c34c 100%
+  );
+  background-size: 49.5px 49.5px;
 }
 
 .modal {
