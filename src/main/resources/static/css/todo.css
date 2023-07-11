@@ -436,3 +436,30 @@ background-size: 49.50px 49.50px;
     linear-gradient(90deg, #68b893 .1em, transparent .1em);
   background-size: 45px 45px; /* Adjust the background size as needed */
 }
+/* page transition */
+#fader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 999999;
+  pointer-events: none;
+  background: #000d18;
+  animation-duration: 500ms;
+  animation-timing-function: ease-in-out;
+}
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+
+#fader.fade-out {
+  opacity: 0;
+  animation-name: fade-out;
+}
