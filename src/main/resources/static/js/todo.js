@@ -170,6 +170,17 @@ function displayTodoSection(cards) {
       todoSection.appendChild(card);
     });
   }
+  // GSAP animation for cards
+  gsap.set(".card", { opacity: 0, y: 100 });
+  ScrollTrigger.batch(".card", {
+    onEnter: (batch) => gsap.to(batch, { opacity: 1, y: 0, stagger: 0.15 }),
+    onLeave: (batch) => gsap.to(batch, { opacity: 0, y: 100 }),
+    onEnterBack: (batch) => gsap.to(batch, { opacity: 1, y: 0, stagger: 0.15 }),
+    onLeaveBack: (batch) => gsap.to(batch, { opacity: 0, y: 100 }),
+
+    start: "top 90%",
+    end: "bottom 10%",
+  });
 }
 
 function displayDoneSection(cards) {
@@ -179,6 +190,17 @@ function displayDoneSection(cards) {
       doneSection.appendChild(card);
     });
   }
+  // GSAP animation for cards
+  gsap.set(".card", { opacity: 0, y: 100 });
+  ScrollTrigger.batch(".card", {
+    onEnter: (batch) => gsap.to(batch, { opacity: 1, y: 0, stagger: 0.15 }),
+    onLeave: (batch) => gsap.to(batch, { opacity: 0, y: 100 }),
+    onEnterBack: (batch) => gsap.to(batch, { opacity: 1, y: 0, stagger: 0.15 }),
+    onLeaveBack: (batch) => gsap.to(batch, { opacity: 0, y: 100 }),
+
+    start: "top 90%",
+    end: "bottom 10%",
+  });
 }
 
 //function to create each todo card
@@ -245,10 +267,9 @@ function createCards(data) {
 
       let para = document.createElement("p");
       para.classList.add("list-item");
-      if(item.key == "cost"){
+      if (item.key == "cost") {
         para.innerText = `$${item.value}`;
-      }
-      else{
+      } else {
         para.innerText = item.value;
       }
       listDiv.appendChild(para);
@@ -458,9 +479,8 @@ function modalType(e) {
   }
 }
 
-
 //function to handle autofill end time when start change
-function endDateAutofill(e){
+function endDateAutofill(e) {
   modalEnd.value = e.target.value;
 }
 

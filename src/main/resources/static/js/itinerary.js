@@ -59,10 +59,10 @@ const getUser = async (userId) => {
 //display user's name
 const displayName = (data) => {
   nameTextBox.innerHTML = "";
-  if(data.length >= 10){
-    let words = data.split(" ")
+  if (data.length >= 10) {
+    let words = data.split(" ");
     nameTextBox.innerHTML = ", " + words[0] + "!";
-  }else{
+  } else {
     nameTextBox.innerHTML = ", " + data + "!";
   }
 };
@@ -262,6 +262,19 @@ function displayCards(data) {
 
     // Append the card to the container
     addCardSection.appendChild(card);
+
+    // GSAP animation for cards
+    gsap.set(".card", { opacity: 0, y: 100 });
+    ScrollTrigger.batch(".card", {
+      onEnter: (batch) => gsap.to(batch, { opacity: 1, y: 0, stagger: 0.15 }),
+      onLeave: (batch) => gsap.to(batch, { opacity: 0, y: 100 }),
+      onEnterBack: (batch) =>
+        gsap.to(batch, { opacity: 1, y: 0, stagger: 0.15 }),
+      onLeaveBack: (batch) => gsap.to(batch, { opacity: 0, y: 100 }),
+
+      start: "top 90%",
+      end: "bottom 10%",
+    });
   }
 }
 
@@ -316,22 +329,23 @@ async function handleEditSubmission(e) {
 }
 
 async function handleDelete(e) {
-    e.preventDefault()
-    let itinerary_id = e.target.parentNode.id;
-    await fetch(`${baseUrl}/itinerary/delete/${itinerary_id}`, {
-        method: "DELETE",
-        headers: headers,
-      }).catch((err) => console.log(err.message));
-    
-    return getItinerary(userId);
+  e.preventDefault();
+  let itinerary_id = e.target.parentNode.id;
+  await fetch(`${baseUrl}/itinerary/delete/${itinerary_id}`, {
+    method: "DELETE",
+    headers: headers,
+  }).catch((err) => console.log(err.message));
+
+  return getItinerary(userId);
 }
 
 function handleView(e) {
   e.preventDefault();
   let itinerary_id = e.target.parentNode.id;
-  window.location.replace(`http://localhost:8080/todo.html?itinerary_id=${itinerary_id}`);
+  window.location.replace(
+    `http://localhost:8080/todo.html?itinerary_id=${itinerary_id}`
+  );
 }
-
 
 //function to switch from edit or add for modal
 function modalType(e) {
@@ -344,7 +358,7 @@ function modalType(e) {
 }
 
 //function to auto fill end date input if start changes
-function endDateAutofill(e){
+function endDateAutofill(e) {
   modalEnd.value = e.target.value;
 }
 

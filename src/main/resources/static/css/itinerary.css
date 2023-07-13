@@ -166,7 +166,7 @@ hr {
   margin: 1vh auto; /* Center the container horizontally */
 }
 
-.card {
+.card, .cards {
   display: block;
   width: 100%;
   padding: 2vh 0vw;

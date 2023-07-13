@@ -229,7 +229,8 @@ label {
 .card {
   display: block;
   width: 100%;
-  padding: 2vh 0vw;
+  padding: 0;
+  padding-bottom: 2vh;
   margin-bottom: 1.5vh;
   border: 3px solid #ffd97d;
   background-color: #fffae4;
