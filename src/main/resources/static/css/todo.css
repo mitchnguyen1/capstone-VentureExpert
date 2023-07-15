@@ -65,6 +65,7 @@ nav {
 
 .navbar-left {
   display: flex;
+  align-items: center;
 }
 
 .navbar-left a {
@@ -174,7 +175,7 @@ hr {
 }
 main {
 
-  width: 60%;
+  width: 80%;
   margin: auto;
 }
 
@@ -185,6 +186,44 @@ main {
   border: 3px solid #ffd97d;
   background-color: #fffae4;
   border-radius: 40px;
+}
+.top{
+  display: flex;
+  width: 90%;
+  margin: 2vh auto;
+  gap: 1vw;
+}
+
+
+#search {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 1000;
+}
+.map {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 0;
+  border: 3px solid #ffd97d;
+  background-color: #fffae4;
+  border-radius: 40px;
+}
+
+#mapid {
+  height: 90%;
+  width: 90%;
+  border-radius: 30px;
+}
+
+
+
+.itineraryInfo {
+  flex: 1;
 }
 .input-box {
   display: flex;
@@ -203,7 +242,7 @@ main {
   color: #04b2a6;
   -webkit-text-stroke: 0.5px black;
   background-color: white;
-  padding: 1vh 1vw;
+  padding: 0vh 1vw;
   margin: 0;
   width: 100%;
   margin-right: 2rem;
@@ -214,7 +253,7 @@ label {
   margin: 0;
   color: white;
   -webkit-text-stroke: 1.25px black;
-  font-size: 4vh;
+  font-size: 3.5vh;
   font-family: "Humming", serif;
   font-weight: 700;
   font-style: normal;
@@ -278,7 +317,7 @@ label {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  
+  width:auto;
 }
 .list-item{
   width: 100%;
@@ -291,6 +330,7 @@ label {
 .list-item-container {
   display: flex;
   margin-top: 0.5vh;
+  align-items: center;
 }
 /* 
 main{
