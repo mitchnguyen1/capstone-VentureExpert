@@ -47,7 +47,7 @@ nav {
   align-items: center;
   background-color: #333;
   color: #ff0000;
-  margin: 1vh auto;
+  margin: 2vh auto;
   background-color: transparent;
   z-index: 5;
   position: relative;
@@ -55,7 +55,7 @@ nav {
 }
 
 .navbar-brand {
-  font-size: 4.5vh;
+
   font-weight: bold;
   text-decoration: none;
   font-family: "Humming", serif;
@@ -66,11 +66,10 @@ nav {
 
 .navbar-left {
   display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
 }
 
 .navbar-left a {
+    font-size: 4vh;
   -webkit-text-stroke: 0.5px black;
   color: #faeede;
 }
