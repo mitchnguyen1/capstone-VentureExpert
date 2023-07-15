@@ -47,7 +47,7 @@ nav {
   align-items: center;
   background-color: #333;
   color: #ff0000;
-  margin: 2vh auto;
+  margin: 1.5vh auto;
   background-color: transparent;
   z-index: 5;
   position: relative;
@@ -66,6 +66,7 @@ nav {
 
 .navbar-left {
   display: flex;
+  align-items: center;
 }
 
 .navbar-left a {

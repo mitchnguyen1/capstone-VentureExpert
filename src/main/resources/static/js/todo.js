@@ -17,6 +17,7 @@ const mainElement = document.querySelector("main");
 const closeTodobutton = document.getElementById("close");
 const todoSection = document.querySelector(".todo");
 const doneSection = document.querySelector(".done");
+const topmap = document.querySelector(".top")
 //Grab element for user's name
 const nameTextBox = document.getElementById("fullName");
 //modal elements
@@ -55,6 +56,42 @@ const getUser = async (userId) => {
     .then((data) => displayName(data))
     .catch((err) => console.log(err.message));
 };
+
+
+
+
+
+//display the map
+var map = L.map("mapid").setView([0, 0], 15);
+
+L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  attribution:
+    '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+}).addTo(map);
+
+const provider = new GeoSearch.OpenStreetMapProvider();
+
+const searchControl = new GeoSearch.GeoSearchControl({
+  provider: provider,
+  showMarker: true,
+  draggable:true
+});
+
+map.addControl(searchControl);
+
+map.on("geosearch/showlocation", function (e) {
+  console.log(e); // Log the event object
+
+  // Check if the location object and its properties exist before trying to use them
+  if (e.location && e.location.lat && e.location.lng) {
+    map.setView(e.location, 20);
+  } else {
+    console.error("Invalid location data:", e.location);
+  }
+});
+
+
+
 
 //display user's name
 const displayName = (data) => {
@@ -96,23 +133,30 @@ async function getItinerary(itinerary_id) {
   }
 }
 
-//function to display the selected itinerary
+// Function to display the selected itinerary
 function displayItinerary(itin) {
-  //handle date format
+  // Handle date format
   let start = itin.start
     .split("-")
     .slice(1)
     .concat(itin.start.split("-")[0])
-    .join("-");
+    .join("/");
   let end = itin.end
     .split("-")
     .slice(1)
     .concat(itin.end.split("-")[0])
-    .join("-");
+    .join("/");
   itinTitle.innerHTML = itin.title;
   itinDate.innerHTML = `${start} - ${end}`;
   itinLocation.innerHTML = `${itin.city}, ${itin.state}`;
+
+  // Search for the city and set the map view
+  provider.search({ query: `${itin.city}` }).then(function (result) {
+    let city = result[0];
+    map.setView([city.y, city.x], 10);
+  });
 }
+
 //dislay total cost of the trip
 function displayCost(data) {
   totalCost.innerHTML = "";
@@ -177,11 +221,10 @@ function displayTodoSection(cards) {
     onLeave: (batch) => gsap.to(batch, { y: 100, immediateRender: false }),
     onEnterBack: (batch) => gsap.to(batch, { opacity: 1, y: 0, stagger: 0.15 }),
     onLeaveBack: (batch) => gsap.to(batch, { y: 100, immediateRender: false }),
-  
+
     start: "top 90%",
     end: "bottom 10%",
   });
-  
 }
 
 function displayDoneSection(cards) {
@@ -322,6 +365,9 @@ function createCards(data) {
     } else {
       doneCards.push(itinCard);
     }
+
+    //plot pins
+    plotPin(todo.address,todo.title)
   });
 
   displayTodoSection(todoCards);
@@ -332,6 +378,7 @@ function createCards(data) {
 function displayModal(e) {
   e.preventDefault();
   mainElement.style.display = "none";
+  topmap.style.display = "none";
   modal.style.display = "block";
 }
 
@@ -350,6 +397,7 @@ function closeModal(e) {
   modalContent.id = "";
   mainElement.style.display = "block";
   modal.style.display = "none";
+  topmap.style.display = "flex";
 }
 
 //function to submit a new todo
@@ -375,6 +423,7 @@ async function addTodo(e) {
       headers: headers,
     });
     if (response.status === 200) {
+      plotPin(modalAddress.value,modalTitle.value)
       closeModal(e);
       getTodos(itinerary_id);
     }
@@ -382,6 +431,19 @@ async function addTodo(e) {
     console.log(err.message);
   }
 }
+
+function plotPin(address, title) {
+  provider.search({ query: `${address}` }).then(function (result) {
+    let city = result[0];
+
+    // Add a marker at the city location
+    const marker = L.marker([city.y, city.x], { draggable: true }).addTo(map);
+
+    // Optional: Add a popup to the marker with the city name
+    marker.bindPopup(title).openPopup();
+  });
+}
+
 
 //itinerary buttons functions
 async function handleEdit(e) {
