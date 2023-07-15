@@ -432,18 +432,18 @@ async function addTodo(e) {
   }
 }
 
-//function to add a pin to map
-function plotPin(address,title){
+function plotPin(address, title) {
   provider.search({ query: `${address}` }).then(function (result) {
     let city = result[0];
-  
+
     // Add a marker at the city location
-    const marker = L.marker([city.y, city.x]).addTo(map);
-    
+    const marker = L.marker([city.y, city.x], { draggable: true }).addTo(map);
+
     // Optional: Add a popup to the marker with the city name
     marker.bindPopup(title).openPopup();
   });
 }
+
 
 //itinerary buttons functions
 async function handleEdit(e) {
