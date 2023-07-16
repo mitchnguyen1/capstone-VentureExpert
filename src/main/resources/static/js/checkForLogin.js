@@ -2,7 +2,7 @@ function checkUserId() {
     const cookieArr = document.cookie.split(";");
     const userId = cookieArr[0].split("=")[1];
     if (userId !== undefined) {
-      window.location.replace("http://localhost:8080/itinerary.html");
+      window.location.replace("http://54.187.96.6:8080/itinerary.html");
     }
     console.log(userId);
   }
