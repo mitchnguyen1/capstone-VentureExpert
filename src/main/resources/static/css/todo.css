@@ -4,7 +4,7 @@
 }
 @font-face {
   font-family: Humming;
-  src: url("Humming.otf");
+  src: url("humming.otf");
 }
 
 body::-webkit-scrollbar{
