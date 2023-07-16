@@ -393,6 +393,7 @@ function closeModal(e) {
   e.preventDefault();
   modalTitle.value = "";
   modalDate.value = "";
+  modalStart.value = "";
   modalEnd.value = "";
   modalAddress.value = "";
   modalCity.value = "";
