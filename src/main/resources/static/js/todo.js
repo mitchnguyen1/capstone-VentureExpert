@@ -194,7 +194,7 @@ function displayTodoSection(cards) {
 
   //creating the add itinerary card
   const addItinerary = document.createElement("div");
-  addItinerary.classList.add("card", "add");
+  addItinerary.classList.add("cards", "add");
 
   // Create the anchor element
   const anchorElement = document.createElement("a");
