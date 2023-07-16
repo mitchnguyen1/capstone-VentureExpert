@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService {
             User user = new User(userDto);
             userRepository.saveAndFlush(user);
             // adds URL for redirect to the login page after registration
-            response.add("http://localhost:8080/login.html");
+            response.add("http://54.187.96.6:8080/login.html");
             return response;
         }
     }
@@ -56,7 +56,7 @@ public class UserServiceImpl implements UserService {
             User user = userOptional.get();
             //check the passwords with encoder
             if (passwordEncoder.matches(userDto.getPassword(), user.getPassword())) {
-                response.add("http://localhost:8080/itinerary.html");
+                response.add("http://54.187.96.6:8080/itinerary.html");
                 response.add(String.valueOf(user.getId()));
             } else {
                 response.add("Incorrect username or password");
