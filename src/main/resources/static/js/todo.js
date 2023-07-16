@@ -36,14 +36,14 @@ const modalDate = document.getElementById("modalDateInput");
 const modalCost = document.getElementById("modalCostInput");
 let startDate = new Date();
 //Data for requests
-const baseUrl = "http://54.187.96.6:8080/api/v1";
+const baseUrl = "http://34.213.142.116:8080/api/v1";
 const headers = {
   "Content-type": "application/json",
 };
 
 if (userId == undefined) {
   console.log(userId);
-  window.location.replace("http://54.187.96.6:8080/index.html");
+  window.location.replace("http://34.213.142.116:8080/index.html");
 }
 
 //Get User's info
@@ -113,7 +113,7 @@ function handleLogout() {
     document.cookie =
       /^[^=]+/.exec(c[i])[0] + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
   }
-  window.location.replace("http://54.187.96.6:8080/index.html");
+  window.location.replace("http://34.213.142.116:8080/index.html");
 }
 //async function to get all itinery from user
 async function getItinerary(itinerary_id) {
