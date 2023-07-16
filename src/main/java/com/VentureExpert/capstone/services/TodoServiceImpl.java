@@ -18,9 +18,8 @@ import java.util.Map;
 import java.util.Optional;
 
 
-
 @Service
-public class TodoServiceImpl implements TodoService{
+public class TodoServiceImpl implements TodoService {
 
     @Autowired
     private TodoRepository todoRepository;
@@ -30,16 +29,16 @@ public class TodoServiceImpl implements TodoService{
 
     @Autowired
     private ItineraryRepository itineraryRepository;
+
     /**
-     private Itinerary itinerary;
-     private String city,State,address,zipcode
-     private String title;
-     private Date date;
-     private Time start;
-     private Time end;
-     private Double cost;
-     private boolean complete;
-     *
+     * private Itinerary itinerary;
+     * private String city,State,address,zipcode
+     * private String title;
+     * private Date date;
+     * private Time start;
+     * private Time end;
+     * private Double cost;
+     * private boolean complete;
      */
 
     @Override
@@ -60,10 +59,26 @@ public class TodoServiceImpl implements TodoService{
         newTodo.setItinerary(itinerary.orElseThrow(() -> new IllegalArgumentException("Itinerary with id: " + json.get("itineraryId") + " could not be found.")));
         newTodo.setTitle(json.get("title"));
         newTodo.setDate(Date.valueOf(json.get("date")));
-        //parse time
-        newTodo.setStart(Time.valueOf(json.get("start")));
-        newTodo.setEnd(Time.valueOf(json.get("end")));
-        newTodo.setCost(Double.valueOf(json.get("cost")));
+
+        // Parse time if start and end values are provided
+        String startTime = json.get("start");
+        String endTime = json.get("end");
+
+        if(startTime.equals(":00")){
+            newTodo.setStart(null);
+        }else{
+            newTodo.setStart(Time.valueOf(startTime));
+        }
+        if(endTime.equals(":00")){
+            newTodo.setEnd(null);
+        }else{
+            newTodo.setEnd(Time.valueOf(endTime));
+        }
+        // Parse cost if it is not an empty string
+        String costValue = json.get("cost");
+        double cost = costValue.isEmpty() ? 0.0 : Double.valueOf(costValue);
+        newTodo.setCost(cost);
+
         newTodo.setComplete(Boolean.parseBoolean(json.get("complete")));
         todoRepository.saveAndFlush(newTodo);
     }
@@ -101,7 +116,7 @@ public class TodoServiceImpl implements TodoService{
             //parse time
             todo.setStart(Time.valueOf(json.get("start")));
             todo.setEnd(Time.valueOf(json.get("end")));
-            System.out.println("Start+++"+json.get("start"));
+            System.out.println("Start+++" + json.get("start"));
             todo.setCost(Double.valueOf(json.get("cost")));
             todo.setComplete(Boolean.parseBoolean(json.get("complete")));
             todoRepository.saveAndFlush(todo);
@@ -111,7 +126,7 @@ public class TodoServiceImpl implements TodoService{
 
     @Override
     public List<Map<String, Object>> getTodoById(Integer id) {
-       return todoRepository.findByTodoId(id);
+        return todoRepository.findByTodoId(id);
     }
 
     @Override

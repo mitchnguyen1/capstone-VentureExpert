@@ -34,7 +34,7 @@ const modalState = document.getElementById("modalStateInput");
 const modalZip = document.getElementById("modalZipcodeInput");
 const modalDate = document.getElementById("modalDateInput");
 const modalCost = document.getElementById("modalCostInput");
-
+let startDate = new Date();
 //Data for requests
 const baseUrl = "http://localhost:8080/api/v1";
 const headers = {
@@ -61,24 +61,26 @@ const getUser = async (userId) => {
 
 
 
-//display the map
+//render the default map
 var map = L.map("mapid").setView([0, 0], 15);
 
+//add a tile layer using openstreetmap
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   attribution:
     '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
 }).addTo(map);
 
+//define a provider object for geosearch
 const provider = new GeoSearch.OpenStreetMapProvider();
-
+//define settings for the provider
 const searchControl = new GeoSearch.GeoSearchControl({
   provider: provider,
   showMarker: true,
   draggable:true
 });
-
+//add search function to map
 map.addControl(searchControl);
-
+//handle search results and reset the view to results
 map.on("geosearch/showlocation", function (e) {
   console.log(e); // Log the event object
 
@@ -135,6 +137,7 @@ async function getItinerary(itinerary_id) {
 
 // Function to display the selected itinerary
 function displayItinerary(itin) {
+  startDate = new Date(itin.start);
   // Handle date format
   let start = itin.start
     .split("-")
@@ -149,7 +152,7 @@ function displayItinerary(itin) {
   itinTitle.innerHTML = itin.title;
   itinDate.innerHTML = `${start} - ${end}`;
   itinLocation.innerHTML = `${itin.city}, ${itin.state}`;
-
+  
   // Search for the city and set the map view
   provider.search({ query: `${itin.city}` }).then(function (result) {
     let city = result[0];
@@ -377,6 +380,9 @@ function createCards(data) {
 //function to display add modal
 function displayModal(e) {
   e.preventDefault();
+  let formattedStartDate = startDate.toISOString().split("T")[0];
+
+  modalDate.value = formattedStartDate;
   mainElement.style.display = "none";
   topmap.style.display = "none";
   modal.style.display = "block";
@@ -387,7 +393,6 @@ function closeModal(e) {
   e.preventDefault();
   modalTitle.value = "";
   modalDate.value = "";
-  modalStart.value = "";
   modalEnd.value = "";
   modalAddress.value = "";
   modalCity.value = "";
@@ -432,6 +437,8 @@ async function addTodo(e) {
   }
 }
 
+
+//function to plot each todo as pin
 function plotPin(address, title) {
   provider.search({ query: `${address}` }).then(function (result) {
     let city = result[0];
@@ -439,7 +446,7 @@ function plotPin(address, title) {
     // Add a marker at the city location
     const marker = L.marker([city.y, city.x], { draggable: true }).addTo(map);
 
-    // Optional: Add a popup to the marker with the city name
+    // Optional: Add a popup to the marker with the title name
     marker.bindPopup(title).openPopup();
   });
 }

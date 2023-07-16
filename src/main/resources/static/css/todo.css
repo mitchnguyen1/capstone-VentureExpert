@@ -242,7 +242,7 @@ main {
   color: #04b2a6;
   -webkit-text-stroke: 0.5px black;
   background-color: white;
-  padding: 0vh 1.5vw;
+  padding-left: 1.5vw;
   margin: 0;
   width: 100%;
   margin-right: 2rem;

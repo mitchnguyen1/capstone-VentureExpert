@@ -26,16 +26,16 @@ public class Todo {
     @Column
     private String title;
 
-    @Column
+    @Column(nullable = true)
     private Date date;
 
-    @Column
+    @Column(nullable = true)
     private Time start;
 
-    @Column(name = "\"end\"")
+    @Column(nullable = true, name = "\"end\"")
     private Time end;
 
-    @Column
+    @Column(nullable = true)
     private Double cost;
 
     @Column
