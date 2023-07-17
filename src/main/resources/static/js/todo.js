@@ -429,6 +429,7 @@ async function addTodo(e) {
       headers: headers,
     });
     if (response.status === 200) {
+      plotPin(modalAddress.value,modalCity.value,modalState.value,modalZip.value,modalTitle.value)
       closeModal(e);
       getTodos(itinerary_id);
     }
@@ -439,7 +440,7 @@ async function addTodo(e) {
 
 
 //function to plot each todo as pin
-function plotPin(address,city,state,zipcode, title) {
+function plotPin(address,city,state,zipcode,title) {
   provider.search({ query: `${address}, ${city},${state} ${zipcode}` }).then(function (result) {
     let city = result[0];
 
