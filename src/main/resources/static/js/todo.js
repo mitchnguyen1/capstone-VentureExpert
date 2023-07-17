@@ -62,7 +62,7 @@ const getUser = async (userId) => {
 
 
 //render the default map
-var map = L.map("mapid").setView([0, 0], 15);
+var map = L.map("mapid").setView([0, 0], 17);
 
 //add a tile layer using openstreetmap
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -156,7 +156,7 @@ function displayItinerary(itin) {
   // Search for the city and set the map view
   provider.search({ query: `${itin.city}` }).then(function (result) {
     let city = result[0];
-    map.setView([city.y, city.x], 10);
+    map.setView([city.y, city.x], 17);
   });
 }
 
