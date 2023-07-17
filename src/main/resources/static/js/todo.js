@@ -370,7 +370,7 @@ function createCards(data) {
     }
 
     //plot pins
-    plotPin(todo.address,todo.title)
+    plotPin(todo.address,todo.city, todo.state, todo.zipcode,todo.title)
   });
 
   displayTodoSection(todoCards);
@@ -429,7 +429,6 @@ async function addTodo(e) {
       headers: headers,
     });
     if (response.status === 200) {
-      plotPin(modalAddress.value,modalTitle.value)
       closeModal(e);
       getTodos(itinerary_id);
     }
@@ -440,8 +439,8 @@ async function addTodo(e) {
 
 
 //function to plot each todo as pin
-function plotPin(address, title) {
-  provider.search({ query: `${address}` }).then(function (result) {
+function plotPin(address,city,state,zipcode title) {
+  provider.search({ query: `${address}, ${city},${state} ${zipcode}` }).then(function (result) {
     let city = result[0];
 
     // Add a marker at the city location
