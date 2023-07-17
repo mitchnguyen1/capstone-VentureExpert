@@ -62,7 +62,7 @@ const getUser = async (userId) => {
 
 
 //render the default map
-var map = L.map("mapid").setView([0, 0], 17);
+var map = L.map("mapid").setView([0, 0], 15);
 
 //add a tile layer using openstreetmap
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -156,7 +156,7 @@ function displayItinerary(itin) {
   // Search for the city and set the map view
   provider.search({ query: `${itin.city}` }).then(function (result) {
     let city = result[0];
-    map.setView([city.y, city.x], 17);
+    map.setView([city.y, city.x], 10);
   });
 }
 
@@ -429,7 +429,6 @@ async function addTodo(e) {
       headers: headers,
     });
     if (response.status === 200) {
-      plotPin(modalAddress.value,modalCity.value,modalState.value,modalZip.value,modalTitle.value)
       closeModal(e);
       getTodos(itinerary_id);
     }
@@ -440,7 +439,7 @@ async function addTodo(e) {
 
 
 //function to plot each todo as pin
-function plotPin(address,city,state,zipcode,title) {
+function plotPin(address,city,state,zipcode, title) {
   provider.search({ query: `${address}, ${city},${state} ${zipcode}` }).then(function (result) {
     let city = result[0];
 
