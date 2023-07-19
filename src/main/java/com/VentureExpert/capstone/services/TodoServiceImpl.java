@@ -116,13 +116,12 @@ public class TodoServiceImpl implements TodoService {
 
             String startTime = json.get("start");
             String endTime = json.get("end");
-
-            if(startTime.equals(":00")){
+            if(startTime.equals("")){
                 todo.setStart(null);
             }else{
                 todo.setStart(Time.valueOf(startTime));
             }
-            if(endTime.equals(":00")){
+            if(endTime.equals("")){
                 todo.setEnd(null);
             }else{
                 todo.setEnd(Time.valueOf(endTime));
