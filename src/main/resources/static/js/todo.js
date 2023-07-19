@@ -368,20 +368,14 @@ async function createCards(data) {
     } else {
       doneCards.push(itinCard);
     }
-  // Plot pins
-  for (const todo of data) {
-    await plotPin(
-      todo.address,
-      todo.city,
-      todo.state,
-      todo.zipcode,
-      todo.title
-    );
-  }
+
+  // Plot pins with delay
+    await plotPin(todo.address, todo.city, todo.state, todo.zipcode, todo.title);
+
+  });
 
   displayTodoSection(todoCards);
   displayDoneSection(doneCards);
-})
 }
 
 //function to display add modal
