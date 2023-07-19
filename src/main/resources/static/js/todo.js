@@ -61,88 +61,36 @@ const getUser = async (userId) => {
 
 
 
-// Render the default map
+//render the default map
 var map = L.map("mapid").setView([0, 0], 15);
 
-// Add a tile layer using OpenStreetMap
+//add a tile layer using openstreetmap
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   attribution:
     '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
 }).addTo(map);
 
-// Define a provider object for geosearch
+//define a provider object for geosearch
 const provider = new GeoSearch.OpenStreetMapProvider();
-
-// Define settings for the provider
+//define settings for the provider
 const searchControl = new GeoSearch.GeoSearchControl({
   provider: provider,
   showMarker: true,
-  draggable: true,
+  draggable:true
 });
-
-// Add search function to map
+//add search function to map
 map.addControl(searchControl);
+//handle search results and reset the view to results
+map.on("geosearch/showlocation", function (e) {
+  console.log(e); // Log the event object
 
-// Load markers from local storage
-loadMarkersFromStorage();
-
-// Function to save marker data to local storage
-function saveMarkerToStorage(markerId, markerData) {
-  const markerDataString = JSON.stringify(markerData);
-  localStorage.setItem(markerId, markerDataString);
-}
-
-// Function to load markers from local storage and create them on the map
-function loadMarkersFromStorage() {
-  for (let i = 0; i < localStorage.length; i++) {
-    const key = localStorage.key(i);
-    if (key.startsWith('marker')) {
-      const markerDataString = localStorage.getItem(key);
-      const markerData = JSON.parse(markerDataString);
-      
-      // Create a marker using the retrieved data
-      const marker = L.marker([markerData.lat, markerData.lng], { draggable: true }).addTo(map);
-      marker.bindPopup(markerData.title).openPopup();
-      
-      // Add an event listener to update marker data in local storage when dragged
-      marker.on('dragend', function() {
-        const updatedMarkerData = {
-          lat: marker.getLatLng().lat,
-          lng: marker.getLatLng().lng,
-          title: markerData.title
-        };
-        saveMarkerToStorage(key, updatedMarkerData);
-      });
-    }
+  // Check if the location object and its properties exist before trying to use them
+  if (e.location && e.location.lat && e.location.lng) {
+    map.setView(e.location, 20);
+  } else {
+    console.error("Invalid location data:", e.location);
   }
-}
-
-// Function to create a new marker and save it to local storage
-function createMarker(lat, lng, title) {
-  const markerId = `marker${localStorage.length + 1}`;
-  
-  // Create a marker using the provided data
-  const marker = L.marker([lat, lng], { draggable: true }).addTo(map);
-  marker.bindPopup(title).openPopup();
-  
-  // Save the marker data to local storage
-  const markerData = {
-    lat: lat,
-    lng: lng,
-    title: title
-  };
-  saveMarkerToStorage(markerId, markerData);
-  
-  // Add an event listener to update marker data in local storage when dragged
-  marker.on('dragend', function() {
-    const updatedMarkerData = {
-      lat: marker.getLatLng().lat,
-      lng: marker.getLatLng().lng,
-      title: markerData.title
-    };
-    saveMarkerToStorage(markerId, updatedMarkerData);
-  });
-}
+});
 
 
 
@@ -422,7 +370,7 @@ function createCards(data) {
     }
 
     //plot pins
-    await plotPin(todo.address,todo.city,todo.state, todo.zipcode,todo.title)
+    await plotPin(todoItems.address,todoItems.city,todoItems.state, todoItems.zipcode,todoItems.title)
   });
 
   displayTodoSection(todoCards);
