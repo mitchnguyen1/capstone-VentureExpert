@@ -369,7 +369,7 @@ async function createCards(data) {
       doneCards.push(itinCard);
     }
 
-  // Plot pins with delay
+  // Plot pins
     await plotPin(todo.address, todo.city, todo.state, todo.zipcode, todo.title);
 
   });
@@ -439,9 +439,8 @@ async function addTodo(e) {
 }
 
 
-// function to plot each todo as pin
-//async to wait for request to return
-async function plotPin(address, city, state, zipcode, title) {
+// Function to plot each todo as pin with delay
+function plotPin(address, city, state, zipcode, title, delay) {
   return new Promise((resolve) => {
     setTimeout(() => {
       provider.search({ query: `${address}, ${city}, ${state} ${zipcode}` }).then(function (result) {
@@ -449,9 +448,9 @@ async function plotPin(address, city, state, zipcode, title) {
         // Add a marker at the city location
         const marker = L.marker([city.y, city.x], { draggable: true }).addTo(map);
         marker.bindPopup(title).openPopup();
-        resolve(); 
+        resolve();
       });
-    }, 1500); // Delay the placement of each pin by 1.5 seconds
+    }, 1300); 
   });
 }
 
