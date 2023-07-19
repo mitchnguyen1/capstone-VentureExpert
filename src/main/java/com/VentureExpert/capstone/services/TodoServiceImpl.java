@@ -113,10 +113,20 @@ public class TodoServiceImpl implements TodoService {
             todo.setLocation(newLocation);
             todo.setTitle(json.get("title"));
             todo.setDate(Date.valueOf(json.get("date")));
-            //parse time
-            todo.setStart(Time.valueOf(json.get("start")));
-            todo.setEnd(Time.valueOf(json.get("end")));
-            System.out.println("Start+++" + json.get("start"));
+
+            String startTime = json.get("start");
+            String endTime = json.get("end");
+
+            if(startTime.equals(":00")){
+                todo.setStart(null);
+            }else{
+                todo.setStart(Time.valueOf(startTime));
+            }
+            if(endTime.equals(":00")){
+                todo.setEnd(null);
+            }else{
+                todo.setEnd(Time.valueOf(endTime));
+            }
             todo.setCost(Double.valueOf(json.get("cost")));
             todo.setComplete(Boolean.parseBoolean(json.get("complete")));
             todoRepository.saveAndFlush(todo);
