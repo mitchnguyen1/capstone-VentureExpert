@@ -251,7 +251,7 @@ function displayDoneSection(cards) {
 }
 
 //function to create each todo card
-function createCards(data) {
+async function createCards(data) {
   let todoCards = [];
   let doneCards = [];
   data.forEach(async (todo) => {
@@ -368,13 +368,20 @@ function createCards(data) {
     } else {
       doneCards.push(itinCard);
     }
-
-    //plot pins
-    await plotPin(todoItems.address,todoItems.city,todoItems.state, todoItems.zipcode,todoItems.title)
-  });
+  // Plot pins
+  for (const todo of data) {
+    await plotPin(
+      todo.address,
+      todo.city,
+      todo.state,
+      todo.zipcode,
+      todo.title
+    );
+  }
 
   displayTodoSection(todoCards);
   displayDoneSection(doneCards);
+})
 }
 
 //function to display add modal
