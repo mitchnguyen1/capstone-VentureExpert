@@ -251,10 +251,11 @@ function displayDoneSection(cards) {
 }
 
 //function to create each todo card
-async function createCards(data) {
+function createCards(data) {
   let todoCards = [];
   let doneCards = [];
-  data.forEach(async (todo) => {
+  let pins = [];
+  data.forEach((todo) => {
     const todoItems = Object.entries(todo).map(([key, value]) => ({
       key,
       value,
@@ -369,11 +370,18 @@ async function createCards(data) {
       doneCards.push(itinCard);
     }
 
-  // Plot pins
-    await plotPin(todo.address, todo.city, todo.state, todo.zipcode, todo.title);
+    //plot pins
+    pins.push({
+      address: todo.address,
+      city: todo.city,
+      state: todo.state,
+      zipcode: todo.zipcode,
+      title: todo.title
+    });
+    
 
   });
-
+  plotPin(pins);
   displayTodoSection(todoCards);
   displayDoneSection(doneCards);
 }
@@ -438,21 +446,24 @@ async function addTodo(e) {
   }
 }
 
+//plot one pin at a time
+async function plotPin(pins) {
+  for (let pin of pins) {
+    const { address, city, state, zipcode, title } = pin;
 
-// function to plot each todo as pin
-//async to wait for request to return
-async function plotPin(address, city, state, zipcode, title) {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      provider.search({ query: `${address}, ${city}, ${state} ${zipcode}` }).then(function (result) {
-        let city = result[0];
-        // Add a marker at the city location
-        const marker = L.marker([city.y, city.x], { draggable: true }).addTo(map);
-        marker.bindPopup(title).openPopup();
-        resolve(); 
-      });
-    }, 1500); // Delay the placement of each pin by 1.5 seconds
-  });
+    try {
+      const result = await provider.search({ query: `${address}, ${city}, ${state} ${zipcode}` });
+      const cityResult = result[0];
+
+      // Add a marker at the city location
+      const marker = L.marker([cityResult.y, cityResult.x], { draggable: true }).addTo(map);
+
+      // Optional: Add a popup to the marker with the title name
+      marker.bindPopup(title).openPopup();
+    } catch (error) {
+      console.error('Error occurred while plotting pin:', error);
+    }
+  }
 }
 
 
