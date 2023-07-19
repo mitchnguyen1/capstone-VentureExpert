@@ -254,7 +254,7 @@ function displayDoneSection(cards) {
 function createCards(data) {
   let todoCards = [];
   let doneCards = [];
-  data.forEach((todo) => {
+  data.forEach(async (todo) => {
     const todoItems = Object.entries(todo).map(([key, value]) => ({
       key,
       value,
@@ -369,8 +369,10 @@ function createCards(data) {
       doneCards.push(itinCard);
     }
 
-    //plot pins
-    plotPin(todo.address,todo.city,todo.state, todo.zipcode,todo.title)
+  // Plot pins with delay
+  for (const todo of data) {
+    await plotPin(todo.address, todo.city, todo.state, todo.zipcode, todo.title);
+  }
   });
 
   displayTodoSection(todoCards);
@@ -438,16 +440,19 @@ async function addTodo(e) {
 }
 
 
-//function to plot each todo as pin
-function plotPin(address,city,state,zipcode, title) {
-  provider.search({ query: `${address}, ${city},${state} ${zipcode}` }).then(function (result) {
-    let city = result[0];
-
-    // Add a marker at the city location
-    const marker = L.marker([city.y, city.x], { draggable: true }).addTo(map);
-
-    // Optional: Add a popup to the marker with the title name
-    marker.bindPopup(title).openPopup();
+// function to plot each todo as pin
+//async to wait for request to return
+async function plotPin(address, city, state, zipcode, title) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      provider.search({ query: `${address}, ${city}, ${state} ${zipcode}` }).then(function (result) {
+        let city = result[0];
+        // Add a marker at the city location
+        const marker = L.marker([city.y, city.x], { draggable: true }).addTo(map);
+        marker.bindPopup(title).openPopup();
+        resolve(); 
+      });
+    }, 1500); // Delay the placement of each pin by 1.5 seconds
   });
 }
 
