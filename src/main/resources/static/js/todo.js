@@ -17,7 +17,7 @@ const mainElement = document.querySelector("main");
 const closeTodobutton = document.getElementById("close");
 const todoSection = document.querySelector(".todo");
 const doneSection = document.querySelector(".done");
-const topmap = document.querySelector(".top")
+const topmap = document.querySelector(".top");
 //Grab element for user's name
 const nameTextBox = document.getElementById("fullName");
 //modal elements
@@ -36,14 +36,14 @@ const modalDate = document.getElementById("modalDateInput");
 const modalCost = document.getElementById("modalCostInput");
 let startDate = new Date();
 //Data for requests
-const baseUrl = "http://34.213.142.116:8080/api/v1";
+const baseUrl = "http://35.88.163.136:8080/api/v1";
 const headers = {
   "Content-type": "application/json",
 };
 
 if (userId == undefined) {
   console.log(userId);
-  window.location.replace("http://34.213.142.116:8080/index.html");
+  window.location.replace("http://35.88.163.136:8080/index.html");
 }
 
 //Get User's info
@@ -56,10 +56,6 @@ const getUser = async (userId) => {
     .then((data) => displayName(data))
     .catch((err) => console.log(err.message));
 };
-
-
-
-
 
 //render the default map
 var map = L.map("mapid").setView([0, 0], 15);
@@ -76,7 +72,7 @@ const provider = new GeoSearch.OpenStreetMapProvider();
 const searchControl = new GeoSearch.GeoSearchControl({
   provider: provider,
   showMarker: true,
-  draggable:true
+  draggable: true,
 });
 //add search function to map
 map.addControl(searchControl);
@@ -91,9 +87,6 @@ map.on("geosearch/showlocation", function (e) {
     console.error("Invalid location data:", e.location);
   }
 });
-
-
-
 
 //display user's name
 const displayName = (data) => {
@@ -113,7 +106,7 @@ function handleLogout() {
     document.cookie =
       /^[^=]+/.exec(c[i])[0] + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
   }
-  window.location.replace("http://34.213.142.116:8080/index.html");
+  window.location.replace("http://35.88.163.136:8080/index.html");
 }
 //async function to get all itinery from user
 async function getItinerary(itinerary_id) {
@@ -152,7 +145,7 @@ function displayItinerary(itin) {
   itinTitle.innerHTML = itin.title;
   itinDate.innerHTML = `${start} - ${end}`;
   itinLocation.innerHTML = `${itin.city}, ${itin.state}`;
-  
+
   // Search for the city and set the map view
   provider.search({ query: `${itin.city}` }).then(function (result) {
     let city = result[0];
@@ -376,10 +369,8 @@ function createCards(data) {
       city: todo.city,
       state: todo.state,
       zipcode: todo.zipcode,
-      title: todo.title
+      title: todo.title,
     });
-    
-
   });
   plotPin(pins);
   displayTodoSection(todoCards);
@@ -452,20 +443,23 @@ async function plotPin(pins) {
     const { address, city, state, zipcode, title } = pin;
 
     try {
-      const result = await provider.search({ query: `${address}, ${city}, ${state} ${zipcode}` });
+      const result = await provider.search({
+        query: `${address}, ${city}, ${state} ${zipcode}`,
+      });
       const cityResult = result[0];
 
       // Add a marker at the city location
-      const marker = L.marker([cityResult.y, cityResult.x], { draggable: true }).addTo(map);
+      const marker = L.marker([cityResult.y, cityResult.x], {
+        draggable: true,
+      }).addTo(map);
 
       // Optional: Add a popup to the marker with the title name
       marker.bindPopup(title).openPopup();
     } catch (error) {
-      console.error('Error occurred while plotting pin:', error);
+      console.error("Error occurred while plotting pin:", error);
     }
   }
 }
-
 
 //itinerary buttons functions
 async function handleEdit(e) {

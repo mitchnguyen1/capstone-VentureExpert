@@ -1,4 +1,3 @@
-
 const username = document.getElementById("username");
 const password = document.getElementById("password");
 const form = document.getElementById("form");
@@ -8,9 +7,7 @@ const headers = {
   "Content-Type": "application/json",
 };
 
-const baseUrl = "http://34.213.142.116:8080/api/v1/users";
-
-
+const baseUrl = "http://35.88.163.136:8080/api/v1/users";
 
 //Login function
 const handleSubmit = async (e) => {

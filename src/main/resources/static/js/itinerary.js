@@ -26,14 +26,14 @@ const modalState = document.getElementById("modalStateInput");
 const addCardSection = document.querySelector(".addCards");
 
 //Data for requests
-const baseUrl = "http://34.213.142.116:8080/api/v1";
+const baseUrl = "http://35.88.163.136:8080/api/v1";
 const headers = {
   "Content-type": "application/json",
 };
 
 // console.log(userId);
 if (userId == undefined) {
-  window.location.replace("http://34.213.142.116:8080/index.html");
+  window.location.replace("http://35.88.163.136:8080/index.html");
 }
 //logout function
 function handleLogout() {
@@ -42,7 +42,7 @@ function handleLogout() {
     document.cookie =
       /^[^=]+/.exec(c[i])[0] + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
   }
-  window.location.replace("http://34.213.142.116:8080/index.html");
+  window.location.replace("http://35.88.163.136:8080/index.html");
 }
 
 //Get User's info
@@ -343,7 +343,7 @@ function handleView(e) {
   e.preventDefault();
   let itinerary_id = e.target.parentNode.id;
   window.location.replace(
-    `http://34.213.142.116:8080/todo.html?itinerary_id=${itinerary_id}`
+    `http://35.88.163.136:8080/todo.html?itinerary_id=${itinerary_id}`
   );
 }
 

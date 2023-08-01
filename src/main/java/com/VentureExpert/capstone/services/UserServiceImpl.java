@@ -36,11 +36,10 @@ public class UserServiceImpl implements UserService {
             User user = new User(userDto);
             userRepository.saveAndFlush(user);
             // adds URL for redirect to the login page after registration
-            response.add("http://34.213.142.116:8080/login.html");
+            response.add("http://35.88.163.136:8080/login.html");
             return response;
         }
     }
-
 
     @Override
     public List<String> userLogin(UserDTO userDto) {
@@ -54,9 +53,9 @@ public class UserServiceImpl implements UserService {
 
         if (userOptional.isPresent()) {
             User user = userOptional.get();
-            //check the passwords with encoder
+            // check the passwords with encoder
             if (passwordEncoder.matches(userDto.getPassword(), user.getPassword())) {
-                response.add("http://34.213.142.116:8080/itinerary.html");
+                response.add("http://35.88.163.136:8080/itinerary.html");
                 response.add(String.valueOf(user.getId()));
             } else {
                 response.add("Incorrect username or password");
@@ -70,10 +69,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public String getUserFullNameById(Integer id) {
         Optional<User> userOptional = userRepository.findById(id);
-        if(userOptional.isPresent()){
+        if (userOptional.isPresent()) {
             return userOptional.get().getFullName();
         }
-    return "";
+        return "";
     }
 }
-
