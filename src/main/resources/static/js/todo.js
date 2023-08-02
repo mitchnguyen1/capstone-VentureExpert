@@ -247,7 +247,8 @@ function displayDoneSection(cards) {
 function createCards(data) {
   let todoCards = [];
   let doneCards = [];
-  let pins = [];
+  let todoPins = [];
+  let donePins = [];
   data.forEach((todo) => {
     const todoItems = Object.entries(todo).map(([key, value]) => ({
       key,
@@ -359,20 +360,28 @@ function createCards(data) {
     const completeItem = todoItems.find((item) => item.key === "complete");
     if (completeItem.value == false) {
       todoCards.push(itinCard);
+      //plot pins
+      todoPins.push({
+        address: todo.address,
+        city: todo.city,
+        state: todo.state,
+        zipcode: todo.zipcode,
+        title: todo.title,
+      });
     } else {
       doneCards.push(itinCard);
+      //plot pins
+      donePins.push({
+        address: todo.address,
+        city: todo.city,
+        state: todo.state,
+        zipcode: todo.zipcode,
+        title: todo.title,
+      });
     }
-
-    //plot pins
-    pins.push({
-      address: todo.address,
-      city: todo.city,
-      state: todo.state,
-      zipcode: todo.zipcode,
-      title: todo.title,
-    });
   });
-  plotPin(pins);
+  plotPinTodo(todoPins);
+  plotPinDone(donePins);
   displayTodoSection(todoCards);
   displayDoneSection(doneCards);
 }
@@ -437,8 +446,10 @@ async function addTodo(e) {
   }
 }
 
-//plot one pin at a time
-async function plotPin(pins) {
+//plot one pin at a time 
+
+//plot blue pin for todo 
+async function plotPinTodo(pins) {
   for (let pin of pins) {
     const { address, city, state, zipcode, title } = pin;
 
@@ -450,6 +461,40 @@ async function plotPin(pins) {
 
       // Add a marker at the city location
       const marker = L.marker([cityResult.y, cityResult.x], {
+        draggable: true,
+      }).addTo(map);
+
+      // Optional: Add a popup to the marker with the title name
+      marker.bindPopup(title).openPopup();
+    } catch (error) {
+      console.error("Error occurred while plotting pin:", error);
+    }
+  }
+}
+
+//plot red pins for done
+async function plotPinDone(pins) {
+  for (let pin of pins) {
+    const { address, city, state, zipcode, title } = pin;
+
+    try {
+      const result = await provider.search({
+        query: `${address}, ${city}, ${state} ${zipcode}`,
+      });
+      const cityResult = result[0];
+
+      //define red pin
+      var redPin = new L.Icon({
+        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+        shadowSize: [41, 41]
+      });
+      // Add a marker at the city location
+      const marker = L.marker([cityResult.y, cityResult.x], {
+        icone: redPin,
         draggable: true,
       }).addTo(map);
 
