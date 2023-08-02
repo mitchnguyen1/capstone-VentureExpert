@@ -494,7 +494,7 @@ async function plotPinDone(pins) {
       });
       // Add a marker at the city location
       const marker = L.marker([cityResult.y, cityResult.x], {
-        icone: redPin,
+        icon: redPin,
         draggable: true,
       }).addTo(map);
 
