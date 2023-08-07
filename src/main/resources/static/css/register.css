@@ -94,3 +94,65 @@ h2{
   opacity: 0;
   animation-name: fade-out;
 }
+
+
+@media screen and (max-width:850px) {
+  h1{
+    font-size: 10vw;
+  }
+  .input-box{
+    flex-direction: column;
+  }
+  label{
+    font-size: 5.5vw;
+    padding: 0vh 2vw;
+    margin-bottom: 1vh;
+  }
+  input{
+    font-size: 4.5vw;
+  }
+  button{
+    font-size: 9vw;
+    padding-bottom: 0;
+  }
+}
+@media screen and (min-width:851px) and (max-width:1050px) {
+  h1{
+    font-size: 8vw;
+  }
+  .input-box{
+    flex-direction: column;
+  }
+  label{
+    font-size: 4vw;
+    padding: 0vh 2vw;
+    margin-bottom: 1vh;
+  }
+  input{
+    font-size: 3.5vw;
+  }
+  button{
+    font-size: 7vw;
+    padding-bottom: 0;
+  }
+}
+@media screen and (min-width:1051px) and (max-width:1400px) {
+  h1{
+    font-size: 8vw;
+  }
+  .menu{
+    width: 75%;
+  }
+  label{
+    font-size: 2.8vw;
+    padding: 0vh 2vw;
+    margin-bottom: 1vh;
+  }
+  input{
+    font-size: 2.8vw;
+  }
+  button{
+    font-size: 5vw;
+    padding-bottom: 0;
+  }
+}

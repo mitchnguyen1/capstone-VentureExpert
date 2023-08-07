@@ -511,3 +511,76 @@ background-size: 49.50px 49.50px;
   opacity: 0;
   animation-name: fade-out;
 }
+@media screen and (max-width:850px) {
+  #svg {
+   height: 200%;
+  }
+  .navbar{
+    width: 100%;
+    margin: 0;
+    margin-bottom: 1.5vh;
+  }
+  .navbar-left {
+    margin-left: 5vw;
+  }
+  .navbar-left a{
+    font-size: 2vh;
+  }
+  img{
+    width: 50%;
+    height: 50%;
+  }
+  .welcome{
+    display: none;
+  }
+  .navbar-right a{
+    font-size: 2vh;
+    display: inline-block;
+    margin: 0;
+  padding: 0;
+  }
+  a img {
+    display: block;
+    margin: 0;
+    padding: 0;
+  }
+  h1{
+    font-size: 8vh;
+  }
+
+  .top{
+    flex-direction: column;
+  }
+
+  #itinHeader{
+    font-size: 3.5vh;
+  }
+  label{
+    font-size: 2.25vh;
+    border-radius: 15px;
+  }
+
+  #title, #date, #location, #totalCost {
+    font-size: 2vh;
+    border-radius: 15px;
+  }
+  #addCardText{
+    font-size: 2.5vh;
+  }
+  .add{
+    padding-bottom: 0;
+  }
+  .card-header{
+    text-align: center;
+    font-size: 2.5vh;
+    max-width: 100%;
+    white-space: normal;
+  max-width: 95%;
+  }
+  p{
+    font-size: 2vh;
+  }
+  .edit-button, .delete-button, .view-button, .complete-button{
+    font-size: 2vh;
+  }
+}

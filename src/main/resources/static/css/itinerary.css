@@ -489,3 +489,80 @@ form label {
   opacity: 0;
   animation-name: fade-out;
 }
+@media screen and (max-width:850px) {
+  #svg {
+   height: 200%;
+  }
+  .navbar{
+    width: 100%;
+    margin: 0;
+    margin-bottom: 1.5vh;
+  }
+  .navbar-left {
+    margin-left: 5vw;
+  }
+  .navbar-left a{
+    font-size: 2vh;
+  }
+  img{
+    width: 50%;
+    height: 50%;
+  }
+  .welcome{
+    display: none;
+  }
+  .navbar-right a{
+    font-size: 2vh;
+    display: inline-block;
+    margin: 0;
+  padding: 0;
+  }
+  a img {
+    display: block;
+    margin: 0;
+    padding: 0;
+  }
+  h1{
+    font-size: 8vh;
+  }
+  .addCards{
+    width: 75%;
+  }
+  #addCardText{
+    font-size: 7vw;
+  }
+  label{
+    font-size: 2.5vh;
+    border-radius: 15px;
+  }
+  .input-box p{
+    font-size: 1.8vh;
+    padding-left: 2vw;
+    border-radius: 15px;
+  }
+  button{
+    font-size: 2.5vh;
+  }
+}
+@media screen and (min-width:600px) and (max-width:1200px){
+  .welcome{
+    display: none;
+  }
+  .navbar-left a {
+    font-size: 3.5vh;
+}
+  .navbar-right a {
+    font-size: 3.5vh;
+}
+img{
+  width: 60%;
+  height: 60%;
+}
+}
+
+@media screen and (min-width:850px) and (max-width:1200px){
+img{
+  width: 80%;
+  height: 80%;
+}
+}

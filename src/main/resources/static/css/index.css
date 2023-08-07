@@ -6,6 +6,8 @@
   font-family: Humming;
   src: url("humming.otf");
 }
+
+
 html,
 body {
   height: 100%;
@@ -173,4 +175,65 @@ button:hover {
 #fader.fade-out {
   opacity: 0;
   animation-name: fade-out;
+}
+
+@media screen and (max-width:767px) {
+  #firstLetter{
+    margin-left:8.5%;
+  }
+  #lastLetter{
+    margin-left: 5%;
+  }
+  .title {
+    display: flex; 
+    flex-direction: row; 
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  h1{
+    margin: 1vh 0vw;
+    font-size: 10vw;
+    padding: 1.5vh 1.5vw;
+  }
+  .menu{
+    width: 75%;
+    border-radius: 15%;
+  }
+  h6{
+    padding: 0vh 1.5px;
+    font-size: 6.5vw;
+  }
+  button{
+    font-size: 8vw;
+    padding-bottom: 0;
+  }
+}
+@media screen and (min-width: 768px) and (max-width: 1150px) {
+  h1{
+    font-size: 7vw;
+  }
+  .menu{
+    width: 75%;
+  }
+  h6{
+    font-size: 6vw;
+  }
+  button{
+    font-size: 6vw;
+    
+  }
+}
+@media screen and (min-width: 1151px) and (max-width: 1700px) {
+  h1{
+    font-size: 7vw;
+  }
+  .menu{
+    width: 60%;
+  }
+  h6{
+    font-size: 4vw;
+  }
+  button{
+    font-size: 4.5vw;
+  }
 }

@@ -155,12 +155,12 @@ function displayCards(data) {
       .split("-")
       .slice(1)
       .concat(data[i].start.split("-")[0])
-      .join("-");
+      .join("/");
     let end = data[i].end
       .split("-")
       .slice(1)
       .concat(data[i].end.split("-")[0])
-      .join("-");
+      .join("/");
 
     // Create the card element
     const card = document.createElement("div");
