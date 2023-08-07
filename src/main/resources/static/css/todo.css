@@ -550,8 +550,11 @@ background-size: 49.50px 49.50px;
 
   .top{
     flex-direction: column;
+    align-items: stretch; 
   }
-
+  #mapid {
+    height: 300px; /* Adjust height for mobile devices */
+  }
   #itinHeader{
     font-size: 3.5vh;
   }
@@ -583,4 +586,5 @@ background-size: 49.50px 49.50px;
   .edit-button, .delete-button, .view-button, .complete-button{
     font-size: 2vh;
   }
+
 }
