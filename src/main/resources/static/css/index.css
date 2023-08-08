@@ -201,11 +201,11 @@ button:hover {
   }
   h6{
     padding: 0vh 1.5px;
-    font-size: 6.5vw;
+    font-size: 5.69vw;
   }
   button{
     font-size: 8vw;
-    padding-bottom: 0;
+    padding: 0 1vw;
   }
 }
 @media screen and (min-width: 768px) and (max-width: 1150px) {

@@ -511,6 +511,10 @@ background-size: 49.50px 49.50px;
   opacity: 0;
   animation-name: fade-out;
 }
+
+
+
+
 @media screen and (max-width:850px) {
   #svg {
    height: 200%;
@@ -553,7 +557,7 @@ background-size: 49.50px 49.50px;
     align-items: stretch; 
   }
   #mapid {
-    height: 300px; /* Adjust height for mobile devices */
+    height: 300px; 
   }
   #itinHeader{
     font-size: 3.5vh;
@@ -583,8 +587,13 @@ background-size: 49.50px 49.50px;
   p{
     font-size: 2vh;
   }
-  .edit-button, .delete-button, .view-button, .complete-button{
+  #close,#submit,.edit-button, .delete-button, .view-button, .complete-button{
     font-size: 2vh;
   }
 
-}
+  input{
+    font-size: 4vw;
+  }
+  .flex-container{
+    flex-wrap: wrap;
+  }

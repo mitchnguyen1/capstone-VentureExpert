@@ -489,6 +489,9 @@ form label {
   opacity: 0;
   animation-name: fade-out;
 }
+
+
+
 @media screen and (max-width:850px) {
   #svg {
    height: 200%;
@@ -542,6 +545,17 @@ form label {
   }
   button{
     font-size: 2.5vh;
+    
+  }
+  #modalTitle{
+    font-size: 3vh;
+  }
+
+  .date-inputs,.location-inputs{
+    flex-wrap: wrap;
+  }
+  input{
+    font-size: 3vw;
   }
 }
 @media screen and (min-width:600px) and (max-width:1200px){
