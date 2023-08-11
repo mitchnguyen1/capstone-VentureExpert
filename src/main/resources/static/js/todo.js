@@ -446,94 +446,120 @@ async function addTodo(e) {
   }
 }
 
-//plot one pin at a time 
-// Plot blue pin for todo 
+//PINS Function
+// Storing pins in local storage
+function storePins(pin) {
+  const { title, marker } = pin[0];
+  const markerInfo = {
+    latlng: marker.getLatLng(),
+    popupContent: marker.getPopup().getContent(),
+  };
+  const pinsJSON = JSON.stringify(markerInfo);
+  localStorage.setItem(title, pinsJSON);
+}
+// Retrieving pins from local storage
+function getStoredPins(title) {
+  const pinsJSON = localStorage.getItem(title);
+  if (pinsJSON) {
+    return JSON.parse(pinsJSON);
+  }
+  return [];
+}
+
+//blue pin function
+async function bluePin(address, city, state, zipcode, title) {
+  try {
+    const result = await provider.search({
+      query: `${address}, ${city}, ${state} ${zipcode}`,
+    });
+    const cityResult = result[0];
+    // Add a marker at the city location
+    const marker = L.marker([cityResult.y, cityResult.x], {
+      draggable: true,
+    }).addTo(map);
+
+    // Optional: Add a popup to the marker with the title name
+    marker.bindPopup(title).openPopup();
+
+    let pin = {
+      title: title,
+      marker: marker,
+    };
+    storePins([pin]);
+  } catch (error) {
+    return error;
+  }
+}
+
+//plot blue pin for todo
 async function plotPinTodo(pins) {
-  let retryCount = 0;
-  const maxRetries = 5; // Set a maximum number of retries
-  
-  while (retryCount < maxRetries) {
-    for (let pin of pins) {
-      const { address, city, state, zipcode, title } = pin;
-
-      try {
-        const result = await provider.search({
-          query: `${address}, ${city}, ${state} ${zipcode}`,
-        });
-        const cityResult = result[0];
-
-        // Add a marker at the city location
-        const marker = L.marker([cityResult.y, cityResult.x], {
-          draggable: true,
-        }).addTo(map);
-
-        // Optional: Add a popup to the marker with the title name
-        marker.bindPopup(title).openPopup();
-      } catch (error) {
-        console.error(`${retryCount}   Error occurred while plotting pin:`, error);
-        retryCount++;
-        continue; // Skip the rest of the loop iteration and retry
+  for (const pin of pins) {
+    const { address, city, state, zipcode, title } = pin;
+    let isInLocal = getStoredPins(title);
+    //search for pin if it's not in local
+    if (isInLocal.length == 0) {
+      let plotResult = await bluePin(address, city, state, zipcode, title);
+      let tryCount = 0;
+      while (plotResult !== undefined && tryCount < 5) {
+        plotResult = await bluePin(address, city, state, zipcode, title);
+        tryCount++;
       }
     }
-    
-    // If no errors occurred, exit the loop
-    break;
-  }
-  
-  if (retryCount === maxRetries) {
-    console.error("Max retries reached. Unable to plot pins.");
+    //plot pin using local
+    else {
+      const marker = L.marker(isInLocal.latlng, {
+        draggable: true,
+      }).addTo(map);
+
+      marker.bindPopup(isInLocal.popupContent).openPopup();
+    }
   }
 }
 
-// Plot red pins for done
+async function redPin(pin) {
+  const { address, city, state, zipcode, title } = pin;
+
+  try {
+    const result = await provider.search({
+      query: `${address}, ${city}, ${state} ${zipcode}`,
+    });
+    const cityResult = result[0];
+
+    //define red pin
+    var redPin = new L.Icon({
+      iconUrl:
+        "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png",
+      shadowUrl:
+        "https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png",
+      iconSize: [25, 41],
+      iconAnchor: [12, 41],
+      popupAnchor: [1, -34],
+      shadowSize: [41, 41],
+    });
+    // Add a marker at the city location
+    const marker = L.marker([cityResult.y, cityResult.x], {
+      icon: redPin,
+      draggable: true,
+    }).addTo(map);
+
+    // Optional: Add a popup to the marker with the title name
+    marker.bindPopup(title).openPopup();
+  } catch (error) {
+    console.error("Error occurred while plotting pin:", error);
+  }
+}
+
+//plot red pins for done
 async function plotPinDone(pins) {
-  let retryCount = 0;
-  const maxRetries = 5; // Set a maximum number of retries
-  
-  while (retryCount < maxRetries) {
-    for (let pin of pins) {
-      const { address, city, state, zipcode, title } = pin;
-
-      try {
-        const result = await provider.search({
-          query: `${address}, ${city}, ${state} ${zipcode}`,
-        });
-        const cityResult = result[0];
-
-        // Define red pin
-        var redPin = new L.Icon({
-          iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
-          shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-          iconSize: [25, 41],
-          iconAnchor: [12, 41],
-          popupAnchor: [1, -34],
-          shadowSize: [41, 41]
-        });
-
-        // Add a marker at the city location with the red pin
-        const marker = L.marker([cityResult.y, cityResult.x], {
-          icon: redPin,
-          draggable: true,
-        }).addTo(map);
-
-        // Optional: Add a popup to the marker with the title name
-        marker.bindPopup(title).openPopup();
-      } catch (error) {
-        console.error(`${retryCount}   Error occurred while plotting pin:`, error);
-        retryCount++;
-        continue; // Skip the rest of the loop iteration and retry
-      }
+  for (const pin of pins) {
+    let plotResult = await redPin(pin);
+    let tryCount = 0;
+    while (plotResult !== undefined && tryCount < 5) {
+      plotResult = await redPin(pin);
+      tryCount++;
     }
-    
-    // If no errors occurred, exit the loop
-    break;
-  }
-  
-  if (retryCount === maxRetries) {
-    console.error("Max retries reached. Unable to plot pins.");
   }
 }
-
 
 //itinerary buttons functions
 async function handleEdit(e) {
