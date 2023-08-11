@@ -516,6 +516,26 @@ async function plotPinTodo(pins) {
   }
 }
 
+// Storing red pins in local storage
+function storeRedPins(pin) {
+  const { title, marker } = pin;
+  const markerInfo = {
+    latlng: marker.getLatLng(),
+    popupContent: marker.getPopup().getContent(),
+  };
+  const pinsJSON = JSON.stringify(markerInfo);
+  localStorage.setItem(`red-${title}`, pinsJSON);
+}
+
+// Retrieving red pins from local storage
+function getStoredRedPins(title) {
+  const pinsJSON = localStorage.getItem(`red-${title}`);
+  if (pinsJSON) {
+    return JSON.parse(pinsJSON);
+  }
+  return [];
+}
+
 async function redPin(pin) {
   const { address, city, state, zipcode, title } = pin;
 
@@ -526,7 +546,7 @@ async function redPin(pin) {
     const cityResult = result[0];
 
     //define red pin
-    var redPin = new L.Icon({
+    var redPinIcon = new L.Icon({
       iconUrl:
         "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png",
       shadowUrl:
@@ -536,16 +556,41 @@ async function redPin(pin) {
       popupAnchor: [1, -34],
       shadowSize: [41, 41],
     });
-    // Add a marker at the city location
-    const marker = L.marker([cityResult.y, cityResult.x], {
-      icon: redPin,
-      draggable: true,
-    }).addTo(map);
 
-    // Optional: Add a popup to the marker with the title name
-    marker.bindPopup(title).openPopup();
+    // Check if the pin is in local storage
+    let isInLocal = getStoredRedPins(title);
+    let marker;
+
+    //plot pin using local
+    if (isInLocal.length != 0) {
+      marker = L.marker(isInLocal.latlng, {
+        icon: redPinIcon,
+        draggable: true,
+      }).addTo(map);
+
+      marker.bindPopup(isInLocal.popupContent).openPopup();
+    } else {
+      // Add a marker at the city location
+      marker = L.marker([cityResult.y, cityResult.x], {
+        icon: redPinIcon,
+        draggable: true,
+      }).addTo(map);
+
+      marker.bindPopup(title).openPopup();
+      let pinInfo = {
+        title: title,
+        marker: marker,
+      };
+      storeRedPins(pinInfo);
+    }
   } catch (error) {
     console.error("Error occurred while plotting pin:", error);
+  }
+}
+
+async function plotPinDone(pins) {
+  for (const pin of pins) {
+    await redPin(pin);
   }
 }
 
