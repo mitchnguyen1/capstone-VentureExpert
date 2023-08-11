@@ -470,7 +470,7 @@ async function plotPinTodo(pins) {
         // Optional: Add a popup to the marker with the title name
         marker.bindPopup(title).openPopup();
       } catch (error) {
-        console.error("Error occurred while plotting pin:", error);
+        console.error(`${retryCount}   Error occurred while plotting pin:`, error);
         retryCount++;
         continue; // Skip the rest of the loop iteration and retry
       }
@@ -519,7 +519,7 @@ async function plotPinDone(pins) {
         // Optional: Add a popup to the marker with the title name
         marker.bindPopup(title).openPopup();
       } catch (error) {
-        console.error("Error occurred while plotting pin:", error);
+        console.error(`${retryCount}   Error occurred while plotting pin:`, error);
         retryCount++;
         continue; // Skip the rest of the loop iteration and retry
       }
